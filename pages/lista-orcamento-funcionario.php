@@ -70,6 +70,11 @@
             -webkit-appearance: none;
             margin: 0;
         } 
+
+        ul.navbar {
+            height: 100%;
+            margin-top: 4em;
+        }
     </style>
 </head>
 <body class="home-body">
@@ -79,8 +84,8 @@
             <div class="fundo-logo"></div>
         </div>
 
-        <ul>
-            <a href="#">
+        <ul class="navbar">
+            <a href="home-funcionario.php">
                 <li><i class="fas fa-home"></i> Home</li>
             </a>
             <a href="cadastro-cliente-funcionario.php">
