@@ -99,10 +99,10 @@
 
     $taxas_linha = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
 
-    $taxas = $taxas_linha->fetch_assoc();
+    $seguro_garantia_taxa = $taxas_linha['seguro_garantia'];
     
-    $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
-    $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
+    $seguro_garantia_taxa_num = intval(str_replace('%', '', $seguro_garantia_taxa));
+    $seguro_garantia = $soma_valores * $seguro_garantia_taxa_num / 100;
 
     $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_civil']));
     $seguro_civil = $soma_valores * $seguro_civil_taxa / 100;
