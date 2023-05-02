@@ -97,7 +97,9 @@
 //Taxas
     $soma_valores = $valor_total_deslocamento + $valor_total_itens + $valor_total_MO;
 
-    $taxas = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+    $taxas_linha = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+
+    $taxas = $taxas_linha->fetch_assoc();
     
     $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
     $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
