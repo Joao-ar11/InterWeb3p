@@ -40,24 +40,23 @@
     $contador = 1;
     $valor_total_itens = 0;
     while (isset($_POST["item" . $contador]) && isset($_POST["quant" . $contador]) && isset($_POST["material-servico" . $contador]) && isset($_POST["preco-unitario" . $contador])) {
-        if($_POST["material-servico" . $contador] === "") {
-            continue;
+        if (!($_POST["material-servico" . $contador] === "")) {
+            $item = $_POST["item" . $contador];
+            $quant = $_POST["quant" . $contador];
+            $material_servico = $_POST["material-servico" . $contador];
+            $preco_unitario = str_replace('R$', '', $_POST["preco-unitario" . $contador]);
+            $preco_final = intval($quant) * floatval($preco_unitario);
+            $valor_total_itens += $preco_final;
+            
+            $insere = "INSERT INTO servicos (itens, quant, material_servico, preco_unitario, preco_final) VALUES ('$item', '$quant', '$material_servico', '$preco_unitario', '$preco_final')";
+
+            // $inserir = "INSERT INTO calculo_orcamento (valor_total_itens) VALUES ('$valor_total_itens')";
+            
+            mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
+            // mysqli_query($conn, $inserir) or die("Não foi possível executar a inserção");
+
+            $contador++;
         }
-        $item = $_POST["item" . $contador];
-        $quant = $_POST["quant" . $contador];
-        $material_servico = $_POST["material-servico" . $contador];
-        $preco_unitario = str_replace('R$', '', $_POST["preco-unitario" . $contador]);
-        $preco_final = intval($quant) * floatval($preco_unitario);
-        $valor_total_itens += $preco_final;
-        
-        $insere = "INSERT INTO servicos (itens, quant, material_servico, preco_unitario, preco_final) VALUES ('$item', '$quant', '$material_servico', '$preco_unitario', '$preco_final')";
-
-        // $inserir = "INSERT INTO calculo_orcamento (valor_total_itens) VALUES ('$valor_total_itens')";
-        
-        mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
-        // mysqli_query($conn, $inserir) or die("Não foi possível executar a inserção");
-
-        $contador++;
     }
 
     // colocando o valor_total_itens para fora do while para não repetir muitas vezes - Cristiano
@@ -97,36 +96,38 @@
 //Taxas
     $soma_valores = $valor_total_deslocamento + $valor_total_itens + $valor_total_MO;
 
-    $taxas = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+    $taxas_row = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
     
-    $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
-    $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
+    while ($taxas = $taxas_row->fetch_assoc()){
+        $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
+        $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
 
-    $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_civil']));
-    $seguro_civil = $soma_valores * $seguro_civil_taxa / 100;
-    
-    $admin_taxa = intval(str_replace('%', '', $taxas["admin"]));
-    $admin_valor = ($soma_valores + $seguro_garantia + $seguro_civil) * $admin_taxa / 100;
+        $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_civil']));
+        $seguro_civil = $soma_valores * $seguro_civil_taxa / 100;
+        
+        $admin_taxa = intval(str_replace('%', '', $taxas["admin"]));
+        $admin_valor = ($soma_valores + $seguro_garantia + $seguro_civil) * $admin_taxa / 100;
 
-    $lucro_taxa = intval(str_replace('%', '', $taxas["lucro"]));
-    $lucro_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor) * $lucro_taxa / 100;
+        $lucro_taxa = intval(str_replace('%', '', $taxas["lucro"]));
+        $lucro_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor) * $lucro_taxa / 100;
 
-    $impostos_taxa = intval(str_replace('%', '', $taxas['impostos']));
-    $impostos_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor + $lucro_valor) * $impostos_taxa / 100;
+        $impostos_taxa = intval(str_replace('%', '', $taxas['impostos']));
+        $impostos_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor + $lucro_valor) * $impostos_taxa / 100;
 
-    $taxa_desconto = $_POST["taxa-desconto"];
-    $desconto_valor = ($soma_valores + $admin_valor + $lucro_taxa) * $taxa_desconto / 100 * -1;
+        $taxa_desconto = $_POST["taxa-desconto"];
+        $desconto_valor = ($soma_valores + $admin_valor + $lucro_taxa) * $taxa_desconto / 100 * -1;
 
-    $valor_total = $soma_valores + $seguro_garantia + $seguro_civil + $lucro_valor + $impostos_valor + $desconto_valor;
+        $valor_total = $soma_valores + $seguro_garantia + $seguro_civil + $lucro_valor + $impostos_valor + $desconto_valor;
 
-//Inserindo dados no Banco
+    //Inserindo dados no Banco
 
-    if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor) && isset($valor_total)) {
+        if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor) && isset($valor_total)) {
 
-    $insere = "INSERT INTO taxa (seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_valor, valor_total) VALUES ('$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$desconto_valor', '$valor_total')";
+        $insere = "INSERT INTO taxa (seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_valor, valor_total) VALUES ('$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$desconto_valor', '$valor_total')";
 
-    mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
+        mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 
+        }
     }
 //Nome dos Profissionais*
     $contador = 1;

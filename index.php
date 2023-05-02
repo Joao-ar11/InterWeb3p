@@ -4,7 +4,7 @@ session_start();
 // Conecta ao banco de dados
 $servidor = "localhost"; // nome do servidor MySQL
 $usuario_bd = "root"; // nome do usuário do banco de dados
-$senha_bd = ""; // senha do banco de dados
+$senha_bd = "root"; // senha do banco de dados
 $nome_bd = "interbd"; // nome do banco de dados
 $conexao = mysqli_connect($servidor, $usuario_bd, $senha_bd, $nome_bd);
 
@@ -13,8 +13,10 @@ if (!$conexao) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
 
-$username = $_POST["username"];
-$password = $_POST["password"];
+if (isset($_POST["username"]) && isset($_POST["password"])){
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+}
 
 
 // Verifica se o usuário já está logado
@@ -61,7 +63,7 @@ if (mysqli_num_rows($resultado) == 1) {
 		<div class="form">
 			<h2 class="texto-login">Login</h2>
 			<form action="Login.php" method="post">
-				<input type="email" name="username" placeholder="UsuÃ¡rio" required>
+				<input type="email" name="username" placeholder="Usuário" required>
 				<input type="password" name="password" placeholder="Senha" required minlength="8" maxlength="16">
 				<button type="submit">Entrar</button>
                 <a href="#">Esqueceu sua senha?</a>
