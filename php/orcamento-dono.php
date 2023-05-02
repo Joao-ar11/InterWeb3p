@@ -96,11 +96,11 @@
 //Taxas
     $soma_valores = $valor_total_deslocamento + $valor_total_itens + $valor_total_MO;
 
-    $taxas_row = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+    $taxas_tabela = mysqli_query($conn, "SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
     
-    while ($taxas = $taxas_row->fetch_assoc()){
-        $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
-        $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
+    while ($taxas = fetch_assoc()){
+    $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
+    $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
 
         $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_civil']));
         $seguro_civil = $soma_valores * $seguro_civil_taxa / 100;
@@ -127,7 +127,6 @@
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 
-        }
     }
 //Nome dos Profissionais*
     $contador = 1;
