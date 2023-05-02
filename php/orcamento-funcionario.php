@@ -81,7 +81,7 @@
         $precoMO = intval($pessoas) * ((intval($dias) * floatval($preco_dia)) + (intval($horas) * floatval($preco_horas)));
         $valor_total_MO += $precoMO;
 
-        $insere = "INSERT INTO mao_de_obra (profissional, pessoas, dias, preco-dias, horas, preco-horas) VALUES ('$profissional', '$pessoas', '$dias', '$preco_dia', '$horas', '$preco_horas')";
+        $insere = "INSERT INTO mao_de_obra (profissional, pessoas, dias, preco_dias, horas, preco_horas) VALUES ('$profissional', '$pessoas', '$dias', '$preco_dia', '$horas', '$preco_horas')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
 
