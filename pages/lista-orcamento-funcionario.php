@@ -104,7 +104,7 @@
             <div class="user-image">
                 
             </div>
-            <p>Usuário: Dono</p>
+            <p>Usuário: Funcionário</p>
         </div>
     </header>
 
