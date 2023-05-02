@@ -28,6 +28,10 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    will-change: transform;
 }
 
 .tabs-home .box-imagem {

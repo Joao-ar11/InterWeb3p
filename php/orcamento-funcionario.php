@@ -69,7 +69,7 @@
     $contador = 1;
     $valor_total_MO = 0;
     while (isset($_POST["profissional" . $contador]) && isset($_POST["pessoas" . $contador]) && isset($_POST["dias" . $contador]) && isset($_POST["preco-dia" . $contador]) && isset($_POST["horas" . $contador]) && isset($_POST["preco-horas" . $contador])) {
-        if ($_POST['profissional'] === "") {
+        if ($_POST['profissional' .$contador] === "") {
             continue;
         }
         $profissional = $_POST["profissional" . $contador];
