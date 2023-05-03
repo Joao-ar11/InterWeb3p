@@ -13,6 +13,9 @@
 
 //Inserindo dados no Banco
 
+    $id_orcamento = $_POST['orcamento-numero'];
+    $conn->query('INSERT INTO orcamento_id (id) VALUES (' . $id_orcamento . ');');
+
     if (isset($cliente) && isset($setor) && isset($endereco) && isset($cidade) && isset($email) && isset($whatsapp)) {
 
         $insere = "INSERT INTO cliente (id, nome_cliente, setor, endereco, cidade, email, whatsapp) VALUES ('1', '$cliente', '$setor', '$endereco', '$cidade', '$email', '$whatsapp')";
@@ -39,7 +42,7 @@
             $preco_unitario = str_replace('R$', '', $_POST["preco-unitario" . $contador]);
             $preco_final = str_replace('R$', '', $_POST["preco-final" . $contador]);
             
-            $insere = "INSERT INTO servicos (itens, quant, material_servico, preco_unitario, preco_final) VALUES ('$item', '$quant', '$material_servico', '$preco_unitario', '$preco_final')";
+            $insere = "INSERT INTO servicos (id_orcamento, itens, quant, material_servico, preco_unitario, preco_final) VALUES ('$id_orcamento', '$item', '$quant', '$material_servico', '$preco_unitario', '$preco_final')";
             
             mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
         }
@@ -58,7 +61,7 @@
         $horas = $_POST["horas" . $contador];
         $preco_horas = $_POST["preco-horas" . $contador];
 
-        $insere = "INSERT INTO mao_de_obra (profissional, pessoas, dias, preco_dias, horas, preco_horas) VALUES ('$profissional', '$pessoas', '$dias', '$preco_dia', '$horas', '$preco_horas')";
+        $insere = "INSERT INTO mao_de_obra (id_orcamento, profissional, pessoas, dias, preco_dias, horas, preco_horas) VALUES ('$id_orcamento', '$profissional', '$pessoas', '$dias', '$preco_dia', '$horas', '$preco_horas')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
         }
@@ -87,15 +90,15 @@
 
 //Inserindo dados no Banco
 
-    $resultado = $conn->query("SELECT MAX(id_tarifa) FROM tarifa;");
+    $resultado = $conn->query("SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);");
     $id_tarifa = 0;
     while ($row = $resultado->fetch_assoc()) {
         $id_tarifa = $row["id_tarifa"];
     }
 
-    if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor) && isset($valor_total)) {
+    if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor)) {
 
-    $insere = "INSERT INTO taxa (id_tarifa, seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_taxa, desconto_valor, valor_total) VALUES ('$id_tarifa', '$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$taxa_desconto', '$desconto_valor', '$valor_total')";
+    $insere = "INSERT INTO taxa (id_orcamento, id_tarifa, seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_taxa, desconto_valor, valor_total) VALUES ('$id_orcamento', '$id_tarifa', '$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$taxa_desconto', '$desconto_valor', '$valor_total')";
 
     mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 
@@ -106,7 +109,7 @@
         $profissional = $_POST['profissional' . $contador];
         $cft_crea = $_POST['cft-crea' . $contador];
 
-        $insere = "INSERT INTO nome_dos_profissionais (nome_profissional, cft_crea) VALUES ('$profissional', '$cft_crea')";
+        $insere = "INSERT INTO nome_dos_profissionais (id_orcamento, nome_profissional, cft_crea) VALUES ('$id_orcamento','$profissional', '$cft_crea')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
         $contador++;
@@ -117,7 +120,7 @@
 
     if (isset($distancia) && isset($distancia_valor)) {
 
-        $insere = "INSERT INTO frete (distancia, distancia_valor) VALUES ('$distancia', '$distancia_valor')";
+        $insere = "INSERT INTO frete (id_orcamento, distancia, distancia_valor) VALUES ('$id_orcamento', '$distancia', '$distancia_valor')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
@@ -132,7 +135,7 @@
 
     if (isset($observacao1) && isset($observacao2) && isset($observacao3)) {
 
-        $insere = "INSERT INTO observacao (observacao1, observacao2, observacao3) VALUES ('$observacao1', '$observacao2', '$observacao3')";
+        $insere = "INSERT INTO observacao (id_orcamento, observacao1, observacao2, observacao3) VALUES ('$id_orcamento', '$observacao1', '$observacao2', '$observacao3')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
@@ -147,7 +150,7 @@
 
     if (isset($validade_orcamento) && isset($data_servico) && isset($horario)) {
 
-        $insere = "INSERT INTO prazos (validade_orcamento, data_servico, horario) VALUES ('$validade_orcamento', '$data_servico', '$horario')";
+        $insere = "INSERT INTO prazos (id_orcamento, validade_orcamento, data_servico, horario) VALUES ('$id_orcamento', '$validade_orcamento', '$data_servico', '$horario')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
@@ -157,6 +160,13 @@
     $valor_total_itens = str_replace('R$', '', $_POST['valor-total-itens']);
     $valor_total_MO = str_replace('R$', '', $_POST['mo-total']);
 
-    mysqli_query($conn, "INSERT INTO calculo_orcamento (resultado, ddata, valor_total_itens, valor_total_MO, tipo_servico, descricao_servico, limitacao_servico) VALUES ('$valor_total', '$data', '$valor_total_itens', '$valor_total_MO', '$tipo_servico', '$descricao_servico', '$limitacao_servico')");
+    $id_cliente = 1;
+    $query = 'SELECT id FROM cadastro WHERE email="' . $_POST['email'] . '";';
+    $resultado = $conn->query($query);
+    while ($row = $resultado->fetch_assoc()) {
+        $id_cliente = $row["id"];
+    }
+
+    mysqli_query($conn, "INSERT INTO calculo_orcamento (id, id_cliente, resultado, ddata, valor_total_itens, valor_total_MO, tipo_servico, descricao_servico, limitacao_servico) VALUES ('$id_orcamento', '$id_cliente', '$valor_total', '$data', '$valor_total_itens', '$valor_total_MO', '$tipo_servico', '$descricao_servico', '$limitacao_servico')");
     header('Location: ../pages/preencherOrcamento-dono.php');
 ?>

@@ -18,6 +18,8 @@
         $imposto = $tarifas_atuais['imposto'];
         $seguro_garantia = $tarifas_atuais['seguro_garantia'];
     }
+    $query = 'SELECT id FROM orcamento_id';
+    $numero_orcamento = $conn->query($query)->num_rows + 1;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -73,11 +75,7 @@
                     <div class="ids">
                         <div class="campo">
                             <label for="orcamento-numero">Orçamento Nᵒ</label>
-                            <input type="text" id="orcamento-numero" name="orcamento-numero">
-                        </div>
-                        <div class="campo">
-                            <label for="os-numero">OS Nᵒ</label>
-                            <input type="text" id="os-numero" name="os-numero">
+                            <input type="text" id="orcamento-numero" name="orcamento-numero" value="<?php echo $numero_orcamento;?>" readonly>
                         </div>
                     </div>
                 </div>
