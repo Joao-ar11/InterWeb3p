@@ -1,3 +1,24 @@
+<?php 
+    include('../php/conn.php');
+    if (isset($_POST["taxaAdm"]) && isset($_POST["lucro"]) && isset($_POST["seguro-civil"]) && isset($_POST["imposto"]) && isset($_POST["seguro-garantia"])) {
+        $query = 'INSERT INTO tarifa (taxa_administrativa, seguro_respon_civil, seguro_garantia, lucro, imposto) VALUES ("' . $_POST['taxaAdm'] . '", "' . $_POST['seguro-civil'] . '", "' . $_POST['seguro-garantia'] . '", "' . $_POST['lucro'] . '", "' . $_POST['imposto'] . '")';
+        $conn->query($query);
+    }
+    $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
+    $resultado = $conn->query($query);
+    $taxa_adm = '0%';
+    $lucro = '0%';
+    $seguro_civil = '0%';
+    $imposto = '0%';
+    $seguro_garantia = '0%';
+    while ($tarifas_atuais = $resultado->fetch_assoc()) {
+        $taxa_adm = $tarifas_atuais['taxa_administrativa'];
+        $lucro = $tarifas_atuais['lucro'];
+        $seguro_civil = $tarifas_atuais['seguro_respon_civil'];
+        $imposto = $tarifas_atuais['imposto'];
+        $seguro_garantia = $tarifas_atuais['seguro_garantia'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -183,27 +204,27 @@
                     </div>
                     <div class="linha-taxa">
                         <p>Seguro Garantia</p>
-                        <p id="taxa-seguro-garantia">3%</p>
+                        <p id="taxa-seguro-garantia"><?php echo $seguro_garantia?></p>
                         <input type="text" id="seguro-garantia" class="taxa" name="seguro-garantia" value="R$0.00" readonly>
                     </div>
                     <div class="linha-taxa">
                         <p>Seguro Respon. Civil</p>
-                        <p id="taxa-seguro-civil">5%</p>
+                        <p id="taxa-seguro-civil"><?php echo $seguro_civil?></p>
                         <input type="text" id="seguro-civil" class="taxa" name="seguro-civil" value="R$0.00" readonly>
                     </div>
                     <div class="linha-taxa">
                         <p>TX Administrativa</p>
-                        <p id="taxa-admin">15%</p>
+                        <p id="taxa-admin"><?php echo $taxa_adm?></p>
                         <input type="text" id="admin-valor" class="taxa" name="admin-valor" value="R$0.00" readonly>
                     </div>
                     <div class="linha-taxa">
                         <p>Lucro</p>
-                        <p id="taxa-lucro">20%</p>
+                        <p id="taxa-lucro"><?php echo $lucro?></p>
                         <input type="text" id="lucro-valor" class="taxa" name="lucro-valor" value="R$0.00" readonly>
                     </div>
                     <div class="linha-taxa">
                         <p>Impostos</p>
-                        <p id="taxa-impostos">25%</p>
+                        <p id="taxa-impostos"><?php echo $imposto?></p>
                         <input type="text" id="impostos-valor" class="taxa" name="impostos-valor" value="R$0.00" readonly>
                     </div>
                     <div class="linha-taxa desconto">

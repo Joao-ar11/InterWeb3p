@@ -91,7 +91,7 @@
 //Taxas
     $soma_valores = $valor_total_deslocamento + $valor_total_itens + $valor_total_MO;
 
-    $taxas_tabela = $conn->query("SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+    $taxas_tabela = $conn->query("SELECT * FROM tarifa where id_tarifa=(SELECT MAX(id_tarifa) FROM tarifa)");
     
     while ($taxas = $taxas_tabela->fetch_assoc()){
         $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));

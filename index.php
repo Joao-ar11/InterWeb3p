@@ -8,6 +8,7 @@ $senha_bd = "root"; // senha do banco de dados
 $nome_bd = "interbd"; // nome do banco de dados
 $conexao = mysqli_connect($servidor, $usuario_bd, $senha_bd, $nome_bd);
 
+$mensagem_erro = "";
 // Verifica se houve erro na conexão
 if (!$conexao) {
     die("Erro de conexão: " . mysqli_connect_error());
@@ -29,7 +30,8 @@ if (isset($_SESSION["username"])) {
 if (isset($_POST["username"]) && isset($_POST["password"])) {
 
 // Define a consulta SQL para buscar as informações do usuário
-$consulta = "SELECT senha FROM cadastro WHERE email = '$username'";
+$consulta = "SELECT senha, funcao FROM cadastro WHERE email = '$username'";
+
 
 // Executa a consulta SQL
 $resultado = $conexao->query($consulta);
@@ -39,9 +41,26 @@ while ($senha_crip = $resultado->fetch_assoc()){
     if (password_verify($password, $senha_crip['senha'])) {
     // Define o nome do usuário na sessão
     $_SESSION["username"] = $usuario;
+        $funcao = $senha_crip['funcao'];
+        
+        if($funcao == 'cliente') {
+            // Redireciona o usuário para a página protegida
+            header("Location: ./pages/home-cliente.php");
+        }
 
-    // Redireciona o usuário para a página protegida
-    header("Location: pages/home-cliente.php");
+        if($funcao == 'funcionario') {
+            // Redireciona o usuário para a página protegida
+            header("Location: ./pages/home-funcionario.php");
+        }
+
+        if($funcao == 'dono') {
+            // Redireciona o usuário para a página protegida
+            header("Location: ./pages/home-dono.php");
+        }
+
+        else {
+            continue;
+        }
 } else {
     // Exibe uma mensagem de erro
     $mensagem_erro = "Usuário ou senha incorretos";

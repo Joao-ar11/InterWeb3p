@@ -91,34 +91,34 @@
 //Taxas
     $soma_valores = $valor_total_deslocamento + $valor_total_itens + $valor_total_MO;
 
-    $taxas_tabela = $conn->query("SELECT * FROM tarifa where id_calculo_orcamento=(SELECT MAX(id_calculo_orcamento) FROM tarifa)");
+    $taxas_tabela = $conn->query("SELECT * FROM tarifa where id_tarifa=(SELECT MAX(id_tarifa) FROM tarifa);");
     
     while ($taxas = $taxas_tabela->fetch_assoc()){
         $seguro_garantia_taxa = intval(str_replace('%', '', $taxas["seguro_garantia"]));
         $seguro_garantia = $soma_valores * $seguro_garantia_taxa / 100;
 
-        $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_civil']));
+        $seguro_civil_taxa = intval(str_replace('%', '', $taxas['seguro_respon_civil']));
         $seguro_civil = $soma_valores * $seguro_civil_taxa / 100;
         
-        $admin_taxa = intval(str_replace('%', '', $taxas["admin"]));
+        $admin_taxa = intval(str_replace('%', '', $taxas["taxa_administrativa"]));
         $admin_valor = ($soma_valores + $seguro_garantia + $seguro_civil) * $admin_taxa / 100;
 
         $lucro_taxa = intval(str_replace('%', '', $taxas["lucro"]));
         $lucro_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor) * $lucro_taxa / 100;
 
-        $impostos_taxa = intval(str_replace('%', '', $taxas['impostos']));
+        $impostos_taxa = intval(str_replace('%', '', $taxas['imposto']));
         $impostos_valor = ($soma_valores + $seguro_garantia + $seguro_civil + $admin_valor + $lucro_valor) * $impostos_taxa / 100;
 
         $taxa_desconto = $_POST["taxa-desconto"];
         $desconto_valor = ($soma_valores + $admin_valor + $lucro_taxa) * $taxa_desconto / 100 * -1;
 
         $valor_total += $seguro_garantia + $seguro_civil + $lucro_valor + $impostos_valor + $desconto_valor;
-
+        $id_tarifa = $taxas['id_tarifa'];
     //Inserindo dados no Banco
 
         if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor) && isset($valor_total)) {
 
-        $insere = "INSERT INTO taxa (seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_valor, valor_total) VALUES ('$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$desconto_valor', '$valor_total')";
+        $insere = "INSERT INTO taxa (id_tarifa, seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_taxa, desconto_valor, valor_total) VALUES ('$id_tarifa', '$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$taxa_desconto', '$desconto_valor', '$valor_total')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 

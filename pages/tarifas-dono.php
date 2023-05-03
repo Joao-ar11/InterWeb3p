@@ -1,3 +1,24 @@
+<?php 
+    include('../php/conn.php');
+    if (isset($_POST["taxaAdm"]) && isset($_POST["lucro"]) && isset($_POST["seguro-civil"]) && isset($_POST["imposto"]) && isset($_POST["seguro-garantia"])) {
+        $query = 'INSERT INTO tarifa (taxa_administrativa, seguro_respon_civil, seguro_garantia, lucro, imposto) VALUES ("' . $_POST['taxaAdm'] . '", "' . $_POST['seguro-civil'] . '", "' . $_POST['seguro-garantia'] . '", "' . $_POST['lucro'] . '", "' . $_POST['imposto'] . '")';
+        $conn->query($query);
+    }
+    $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
+    $resultado = $conn->query($query);
+    $taxa_adm = '0%';
+    $lucro = '0%';
+    $seguro_civil = '0%';
+    $imposto = '0%';
+    $seguro_garantia = '0%';
+    while ($tarifas_atuais = $resultado->fetch_assoc()) {
+        $taxa_adm = $tarifas_atuais['taxa_administrativa'];
+        $lucro = $tarifas_atuais['lucro'];
+        $seguro_civil = $tarifas_atuais['seguro_respon_civil'];
+        $imposto = $tarifas_atuais['imposto'];
+        $seguro_garantia = $tarifas_atuais['seguro_garantia'];
+    }
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
 <head> 
@@ -53,27 +74,27 @@
             <div class="grid-input">
                 <div class="campo">
                     <label for="taxataxaAdm">Taxa Adminstrativa:</label>
-                    <input type="text" id="taxa" name="taxaAdm" pattern="\d+%?" placeholder="Insira a taxa" required>
+                    <input type="text" id="taxa" name="taxaAdm" pattern="\d+%" value=<?php echo '"' . $taxa_adm . '"'?> placeholder="Insira a taxa" required>
                 </div>
     
                 <div class="campo">
                     <label for="lucro">Lucro:</label>
-                    <input type="text" id="lucro" name="lucro" placeholder="Insira o lucro previsto" pattern="\d+%?" required>
+                    <input type="text" id="lucro" name="lucro" value=<?php echo '"' . $lucro . '"'?> placeholder="Insira o lucro previsto" pattern="\d+%" required>
                 </div>
                 
                 <div class="campo">
                     <label for="seguro-civil">Seguro Respon. Civil:</label>
-                    <input type="text" id="seguro-civil" name="seguro-civil" placeholder="Insira a taxa" pattern="\d+%?" required>
+                    <input type="text" id="seguro-civil" name="seguro-civil" value=<?php echo '"' . $seguro_civil . '"'?> placeholder="Insira a taxa" pattern="\d+%" required>
                 </div>
     
                 <div class="campo">
                     <label for="impostos">Impostos:</label>
-                    <input type="text" id="impostos" name="imposto" placeholder="Insira o Imposto" pattern="\d+%?" required>
+                    <input type="text" id="impostos" name="imposto" value=<?php echo '"' . $imposto . '"'?> placeholder="Insira o Imposto" pattern="\d+%" required>
                 </div>
 
                 <div class="campo">
                     <label for="seguro-garantia">Seguro Garantia:</label>
-                    <input type="text" id="seguro-garantia" placeholder="Insira a taxa" name="seguro-garantia" pattern="\d+%?" required>
+                    <input type="text" id="seguro-garantia" placeholder="Insira a taxa" value=<?php echo '"' . $seguro_garantia . '"'?> name="seguro-garantia" pattern="\d+%" required>
                 </div>
     
                 <button type="button" id="open-modal">Salvar Fórmula</button>
