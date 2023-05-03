@@ -294,7 +294,7 @@
                         <input type="text" id="distancia-valor" name="distancia-valor">
                     </div>
                     <h2>Valor total</h2>
-                    <p id="valor-total">R$00.00</p>
+                    <input id="valor-total" type="text" name="valor-total" value="R$00.00" readonly>
                 </div>
                 <div class="observacoes">
                     <h2>Observações</h2>

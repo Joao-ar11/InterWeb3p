@@ -232,7 +232,7 @@
                     <div class="linha-taxa desconto">
                         <p>Desconto</p>
                         <input type="text" id="taxa-desconto" name="taxa-desconto" value="0%">
-                        <input type="text" id="desconto-valor" name="desconto-valor" value="- R0.00" readonly>
+                        <input type="text" id="desconto-valor" name="desconto-valor" value="- R$0.00" readonly>
                     </div>
                 </div>
                 <div class="profissionais">
@@ -296,7 +296,7 @@
                         <input type="text" id="distancia-valor" name="distancia-valor">
                     </div>
                     <h2>Valor total</h2>
-                    <p id="valor-total">R$00.00</p>
+                    <input id="valor-total" type="text" name="valor-total" value="R$00.00" readonly>
                 </div>
                 <div class="observacoes">
                     <h2>Observações</h2>

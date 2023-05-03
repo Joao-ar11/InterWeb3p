@@ -110,7 +110,7 @@ function calculoDeTaxas(soma) {
     document.querySelector("#desconto-valor").value = "- R$" + descontoValor;
     resultado = calcularFloats(resultado, "-", descontoValor);
 
-    document.querySelector("#valor-total").textContent = "R$" + (+calcularFloats(soma, "+", resultado)).toFixed(2);
+    document.querySelector("#valor-total").value = "R$" + (+calcularFloats(soma, "+", resultado)).toFixed(2);
 }
 
 function mudarPrecoTotal() {
@@ -118,8 +118,8 @@ function mudarPrecoTotal() {
     const valorMO = document.querySelector("#mo-total").value.replace(/[R$]/g, "").replace(/(\.)\d{3}/, "").replace(",", ".");
     const deslocamento = document.querySelector("#deslocamento").value.replace(/[R$]/g, "").replace(/(\.)\d{3}/, "").replace(",", ".");
     calculoDeTaxas(calcularFloats(valorItens, "+", calcularFloats(valorMO, "+", deslocamento)));
-    document.querySelector("#observacao2").value = "R$" + (+calcularFloats(document.querySelector("#valor-total").textContent.replace(/[R$]/g, ""), "*", "0.20")).toFixed(2);
-    document.querySelector("#observacao3").value = "R$" + (+calcularFloats(document.querySelector("#valor-total").textContent.replace(/[R$]/g, ""), "*", "0.30")).toFixed(2);
+    document.querySelector("#observacao2").value = "R$" + (+calcularFloats(document.querySelector("#valor-total").value.replace(/[R$]/g, ""), "*", "0.20")).toFixed(2);
+    document.querySelector("#observacao3").value = "R$" + (+calcularFloats(document.querySelector("#valor-total").value.replace(/[R$]/g, ""), "*", "0.30")).toFixed(2);
 }
 
 function mudarPrecoTotalItens() {

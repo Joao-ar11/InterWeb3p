@@ -293,7 +293,7 @@ input:read-only {
     text-align: center;
 }
 
-.valor-total > p {
+#valor-total{
     text-align: center;
     font-size: 1.5rem;
     background-color: #D9D9D9;
