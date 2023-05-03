@@ -1,7 +1,7 @@
 <?php
     include('../php/conn.php');
 
-    $sql_code_servicos = "SELECT tipo_servico FROM servicos";
+    $sql_code_servicos = "SELECT tipo_servico FROM calculo_orcamento";
     $sql_query_servicos = $conn->query($sql_code_servicos) or die ("Erro ao consultar!");
 
     $sql_code_taxa = "SELECT id FROM taxa";

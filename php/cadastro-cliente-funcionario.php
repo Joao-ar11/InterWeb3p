@@ -18,7 +18,7 @@
 
     if (isset($nome) && isset($cnpj) && isset($contato) && isset($endereco) && isset($email) && isset($bairro) && isset($n_endereco) && isset($complemento) && isset($senha) && isset($funcao))  {
 
-        $insere = "INSERT INTO cadastro_c (nome, cnpj, contato, endereco, email, bairro, n_endereco, complemento, senha, funcao) VALUES ('$nome', '$cnpj', '$contato', '$endereco', '$email', '$bairro', '$n_endereco', '$complemento', '$senha', '$funcao')";
+        $insere = "INSERT INTO cadastro (nome, cnpj, contato, email, bairro, n_endereco, complemento, senha, funcao) VALUES ('$nome', '$cnpj', '$contato', '$email', '$bairro', '$n_endereco', '$complemento', '$senha', '$funcao')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }

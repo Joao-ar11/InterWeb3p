@@ -29,13 +29,14 @@ if (isset($_SESSION["username"])) {
 if (isset($_POST["username"]) && isset($_POST["password"])) {
 
 // Define a consulta SQL para buscar as informações do usuário
-$consulta = "SELECT * FROM cadastro_c WHERE email = '$username' AND senha = '$password'";
+$consulta = "SELECT senha FROM cadastro WHERE email = '$username'";
 
 // Executa a consulta SQL
-$resultado = mysqli_query($conexao, $consulta);
+$resultado = $conexao->query($consulta);
 
 // Verifica se a consulta retornou um resultado
-if (mysqli_num_rows($resultado) == 1) {
+while ($senha_crip = $resultado->fetch_assoc()){
+    if (password_verify($password, $senha_crip['senha'])) {
     // Define o nome do usuário na sessão
     $_SESSION["username"] = $usuario;
 
@@ -44,7 +45,7 @@ if (mysqli_num_rows($resultado) == 1) {
 } else {
     // Exibe uma mensagem de erro
     $mensagem_erro = "Usuário ou senha incorretos";
-    echo $mensagem_erro;
+}
 }
 }
 ?>
@@ -56,15 +57,21 @@ if (mysqli_num_rows($resultado) == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .erro {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <section class="fundo-login"> 
         <img  class="logo-login" src="images/logo.png" alt="Logo da empresa">
 		<div class="form">
 			<h2 class="texto-login">Login</h2>
-			<form action="Login.php" method="post">
+			<form action="./index.php" method="post">
 				<input type="email" name="username" placeholder="Usuário" required>
 				<input type="password" name="password" placeholder="Senha" required minlength="8" maxlength="16">
+                <p class='erro'><?php echo $mensagem_erro?></p>
 				<button type="submit">Entrar</button>
                 <a href="#">Esqueceu sua senha?</a>
 			</form>
