@@ -1,3 +1,9 @@
+<?php
+    include('../php/conn.php');
+    session_start();
+    $id_cliente = $_SESSION["id"];
+    $orcamentos = $conn->query('SELECT id FROM calculo_orcamento WHERE id_cliente=' . $id_cliente . ';');
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
 <head> 
@@ -39,18 +45,16 @@
         <h1>Início</h1>
         <h2>SERVIÇOS</h2>
         <ul>
-            <div>
-                <li>Serviço #0001 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status01">Em validação</p>
-            </div>
-            <div>
-                <li>Serviço #0002 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status02">Em execução</p>
-            </div>
-            <div>
-                <li>Serviço #0003 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status03">Finalizado</p>
-            </div>
+            <?php
+            $contador = 1;
+                while($orcamento = $orcamentos->fetch_assoc()){
+                    echo '<div>
+                        <li>Serviço #000' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
+                        <p class="status01">Em validação</p>
+                    </div>';
+                    $contador++;
+                }
+            ?>
         </ul>
         <div style="display: flex; align-items: center;">
             <button id="more">Ver mais <img id="seta" src="../images/seta-para-baixo.png"></button>

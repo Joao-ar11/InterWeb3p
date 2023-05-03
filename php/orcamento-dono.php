@@ -98,7 +98,7 @@
 
     if (isset($seguro_garantia) && isset($seguro_civil) && isset($admin_valor) && isset($lucro_valor) && isset($impostos_valor) && isset($desconto_valor)) {
 
-    $insere = "INSERT INTO taxa (id_orcamento, id_tarifa, seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_taxa, desconto_valor, valor_total) VALUES ('$id_orcamento', '$id_tarifa', '$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$taxa_desconto', '$desconto_valor', '$valor_total')";
+    $insere = "INSERT INTO taxa (id_orcamento, id_tarifa, seguro_garantia, seguro_civil, admin_valor, lucro_valor, impostos_valor, desconto_taxa, desconto_valor) VALUES ('$id_orcamento', '$id_tarifa', '$seguro_garantia', '$seguro_civil', '$admin_valor', '$lucro_valor', '$impostos_valor', '$taxa_desconto', '$desconto_valor')";
 
     mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 
@@ -106,10 +106,10 @@
 //Nome dos Profissionais*
     $contador = 1;
     while(isset($_POST['nome-profissional' . $contador]) && isset($_POST['cft-crea' . $contador])) {
-        $profissional = $_POST['profissional' . $contador];
+        $nome_profissional = $_POST['profissional' . $contador];
         $cft_crea = $_POST['cft-crea' . $contador];
 
-        $insere = "INSERT INTO nome_dos_profissionais (id_orcamento, nome_profissional, cft_crea) VALUES ('$id_orcamento','$profissional', '$cft_crea')";
+        $insere = "INSERT INTO nome_dos_profissionais (id_orcamento, nome_profissional, cft_crea) VALUES ('$id_orcamento','$nome_profissional', '$cft_crea')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
         $contador++;
@@ -120,7 +120,7 @@
 
     if (isset($distancia) && isset($distancia_valor)) {
 
-        $insere = "INSERT INTO frete (id_orcamento, distancia, distancia_valor) VALUES ('$id_orcamento', '$distancia', '$distancia_valor')";
+        $insere = "INSERT INTO frete (id_orcamento, distancia, distancia_valor, valor_total_deslocamento) VALUES ('$id_orcamento', '$distancia', '$distancia_valor', '$valor_total_deslocamento')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }

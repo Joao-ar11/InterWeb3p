@@ -2,11 +2,20 @@
 session_start();
 
 // Conecta ao banco de dados
-$servidor = "localhost"; // nome do servidor MySQL
-$usuario_bd = "root"; // nome do usuário do banco de dados
-$senha_bd = "root"; // senha do banco de dados
-$nome_bd = "interbd"; // nome do banco de dados
-$conexao = mysqli_connect($servidor, $usuario_bd, $senha_bd, $nome_bd);
+//$servidor = "localhost"; // nome do servidor MySQL
+//$usuario_bd = "root"; // nome do usuário do banco de dados
+//$senha_bd = "root"; // senha do banco de dados
+//$nome_bd = "interbd"; // nome do banco de dados
+//$conexao = mysqli_connect($servidor, $usuario_bd, $senha_bd, $nome_bd);
+
+//Banco remoto
+$DB_HOST = $_ENV["DB_HOST"];
+$DB_USER = $_ENV["DB_USER"];
+$DB_PASSWORD = $_ENV["DB_PASSWORD"];
+$DB_NAME = $_ENV["DB_NAME"];
+$DB_PORT = $_ENV["DB_PORT"];
+
+$conexao = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME, $DB_PORT);
 
 $mensagem_erro = "";
 // Verifica se houve erro na conexão
@@ -30,7 +39,7 @@ if (isset($_SESSION["username"])) {
 if (isset($_POST["username"]) && isset($_POST["password"])) {
 
 // Define a consulta SQL para buscar as informações do usuário
-$consulta = "SELECT senha, funcao FROM cadastro WHERE email = '$username'";
+$consulta = "SELECT id, senha, funcao FROM cadastro WHERE email = '$username'";
 
 
 // Executa a consulta SQL
@@ -41,6 +50,7 @@ while ($senha_crip = $resultado->fetch_assoc()){
     if (password_verify($password, $senha_crip['senha'])) {
     // Define o nome do usuário na sessão
     $_SESSION["username"] = $usuario;
+    $_SESSION["id"] = $senha_crip["id"];
         $funcao = $senha_crip['funcao'];
         
         if($funcao == 'cliente') {
