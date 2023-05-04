@@ -12,7 +12,8 @@ input {
 }
 
 /* HOME */
-.home, .home-body {
+.home,
+.home-body {
     height: 100%;
     margin: 0;
 }
@@ -134,7 +135,7 @@ input {
 /* INPUTS - FORMULARIO*/
 
 label {
-    display:block;
+    display: block;
     margin-left: 7px;
 }
 
@@ -172,7 +173,7 @@ div.input-grande input {
 .campos-medios {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;   
+    justify-content: space-between;
 }
 
 .campos-medios label {
@@ -184,7 +185,8 @@ div.input-grande input {
     width: 320px;
 }
 
-label[for="ENDERECO"], label[for="EMAIL"] {
+label[for="ENDERECO"],
+label[for="EMAIL"] {
     margin-top: 10px;
 }
 
@@ -200,7 +202,7 @@ div.campos-segunda-fileira {
     justify-content: space-between;
 }
 
-div.campos-pequenos input[id="N-ENDERECO"]{
+div.campos-pequenos input[id="N-ENDERECO"] {
     width: 70px;
 }
 
@@ -210,8 +212,8 @@ div.complemento input[id="COMPLEMENTO"] {
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* FIM INPUTS - FORMULARIO */
@@ -221,12 +223,14 @@ input[type="number"]::-webkit-inner-spin-button {
 .botoes {
     margin-top: 3em;
     display: flex;
+    flex-direction: row;
+
     justify-content: space-between;
 }
 
 button {
     font-weight: bold;
-    border:none;
+    border: none;
     border-radius: 25px;
     width: 150px;
     height: 49px;
@@ -237,17 +241,18 @@ button {
 button:nth-child(1) {
     background-color: rgb(243, 39, 39);
 }
+
 button:nth-child(1):hover {
     background-color: rgba(255, 0, 0, 0.765);
     transform: scale(1.05);
     transition: 0.4s;
 }
 
-button:nth-child(2) {
+button:nth-child(3) {
     background-color: #46f41b;
 }
 
-button:nth-child(2):hover {
+button:nth-child(3):hover {
     background-color: #6fff4a;
     transform: scale(1.05);
     transition: 0.4s;

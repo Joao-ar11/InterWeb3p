@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
     <script src="../javascript/modal.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Cadastrar funcionário</title>
+    
 </head>
 <body class="home-body">    
     <header class="tabs-home">
@@ -51,7 +53,7 @@
     <section class="section-home">
         <h1>Cadastrar Funcionário</h1>
 
-        <form action="../php/cadastro-funcionario.php" class="form-cadastro-funcionario" method="post">
+        <form action="../php/cadastro-funcionario.php" class="form-cadastro-funcionario" method="post" onsubmit="return valida()">
             <div class="inputs-grande">
                 <label for="NOME">Nome Completo</label>
                 <input type="text" name="NOME" id="NOME" placeholder="Nome completo do funcionário" required>
@@ -74,12 +76,14 @@
                 <div class="input-medio">
                     <label for="SENHACONFIRM">Confirmar Senha</label>
                     <input  class="input-esquerdo" type="password" name="SENHACONFIRM" id="SENHACONFIRM"  placeholder="Confirme a senha" minlength="8" maxlength="16" required>
-                </div>         
+                </div>    
+            
                 <div class="input-medio">
                     <button type="button" id="open-modal">CADASTRAR</button>
                 </div>
+            
             </div>
-
+            <div class="g-recaptcha" data-sitekey="6LcnCmclAAAAAIfsoESyWb6brsld_grmS2BavXQ6"></div>
             <!--MODAL-->
             <div id="fade" class="hide"></div>
             <div id="modal" class="hide">
@@ -96,6 +100,13 @@
             </div>
         </form>
     </section>
-    
+    <script type="text/javascript">
+        function valida(){
+            if(grecaptcha.getResponse() ==''){
+                alert('VOCE PRECISA MARCAR A VALIDACAO');
+                return false;
+            }
+        }
+       </script>
 </body>
 </html>

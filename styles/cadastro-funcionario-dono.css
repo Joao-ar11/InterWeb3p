@@ -12,7 +12,8 @@ input {
 }
 
 /* HOME */
-.home, .home-body {
+.home,
+.home-body {
     height: 100%;
     margin: 0;
 }
@@ -127,13 +128,12 @@ input {
     font-size: 1.1em;
 }
 
-.section-home .form-cadastro-funcionario .inputs-grande{
+.section-home .form-cadastro-funcionario .inputs-grande {
     margin-bottom: 12px;
 }
 
 .section-home .form-cadastro-funcionario .inputs-grande input,
-.section-home .form-cadastro-funcionario .inputs-medio .input-medio input
-{
+.section-home .form-cadastro-funcionario .inputs-medio .input-medio input {
     border: none;
     height: 35px;
     border-radius: 10px;

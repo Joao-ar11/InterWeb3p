@@ -44,7 +44,7 @@
     <section class="section-home" > <!-- CONTEUDO PRINCIPAL -->
         <h1>Cadastrar Cliente</h1>
         
-        <form action="../php/cadastro-cliente-funcionario.php" method="post"> <!-- INPUTS - FORMULÁRIO -->
+        <form action="../php/cadastro-cliente-funcionario.php" method="post" onsubmit="return valida()"> <!-- INPUTS - FORMULÁRIO -->
 
             <div class="input-grande" >
                <label for="NOME">Nome da empresa</label>
@@ -126,6 +126,14 @@
         </form>
         
     </section>
+    <script type="text/javascript">
+        function valida(){
+            if(grecaptcha.getResponse() ==''){
+                alert('VOCE PRECISA MARCAR A VALIDACAO');
+                return false;
+            }
+        }
+       </script>
 
 </body>
 </html>
