@@ -1,6 +1,16 @@
 <?php
     include("../php/conn.php");
     $id = $_GET['id'];
+    $tipo_servico = '';
+    $descricao_servico = '';
+    $limitacao_servico = '';
+    $query = 'SELECT * FROM orcamento_id WHERE id=' . $id . ';';
+    $resultado = $conn->query($query);
+    while ($row = $resultado->fetch_assoc()) {
+        $tipo_servico = $row['tipo_servico'];
+        $descricao_servico = $row['descricao_servico'];
+        $limitacao_servico = $row['limitacao_servico'];
+    }
     $query = 'SELECT * FROM calculo_orcamento WHERE id=' . $id . ';';
     $resultado = $conn->query($query);
     $id_orcamento = '';
@@ -8,18 +18,12 @@
     $data = '';
     $valor_total_itens = '';
     $valor_total_MO = '';
-    $tipo_servico = '';
-    $descricao_servico = '';
-    $limitacao_servico = '';
     while ($row = $resultado->fetch_assoc()) {
         $id_orcamento = $row['id'];
         $valor_total = $row['resultado'];
         $data = $row['ddata'];
         $valor_total_itens = $row['valor_total_itens'];
         $valor_total_MO = $row['valor_total_MO'];
-        $tipo_servico = $row['tipo_servico'];
-        $descricao_servico = $row['descricao_servico'];
-        $limitacao_servico = $row['limitacao_servico'];
     }
     $query = 'SELECT * FROM frete WHERE id_orcamento=' . $id . ';';
     $resultado = $conn->query($query);
@@ -84,6 +88,20 @@
         $seguro_garantia_taxa = $row['seguro_garantia'];
         $lucro = $row['lucro'];
         $imposto = $row['imposto'];
+    }
+    $query = 'SELECT * FROM forma_pagamento WHERE id_orcamento=' . $id_orcamento . ';';
+    $resultado = $conn->query($query);
+    $email = '';
+    $banco = '';
+    $agencia = '';
+    $conta_corrente = '';
+    $pix = '';
+    while ($row = $resultado->fetch_assoc()) {
+        $email = $row['e_mail'];
+        $banco = $row['banco'];
+        $agencia = $row['agencia'];
+        $conta_corrente = $row['conta_corrente'];
+        $pix = $row['pix'];
     }
     $query = 'SELECT * FROM servicos WHERE id_orcamento=' . $id . ';';
     $servicos = $conn->query($query);
@@ -240,19 +258,19 @@
             <div>
                 <div class="campo">
                     <p class="label">Banco</p>
-                    <p class="input"></p>
+                    <p class="input"><?php echo $banco?></p>
                 </div>
                 <div class="campo">
                     <p class="label">Agência</p>
-                    <p class="input"></p>
+                    <p class="input"><?php echo $agencia?></p>
                 </div>
                 <div class="campo">
                     <p class="label">Conta Corrente</p>
-                    <p class="input"></p>
+                    <p class="input"><?php echo $conta_corrente?></p>
                 </div>
             </div>
-            <p class="input"><b>PIX:</b><span></span></p>
-            <p class="input"><b>Email:</b><span></span>placeservicos@gmail.com</p>
+            <p class="input"><b>PIX:</b><span></span><?php echo $pix?></p>
+            <p class="input"><b>Email:</b><span></span><?php echo $email?></p>
         </div>
         <div class="valor-total">
             <h2>Deslocamento</h2>

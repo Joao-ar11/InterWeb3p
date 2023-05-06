@@ -1,2 +1,9 @@
 # InterWeb3p
-[Github Pages](https://joao-ar11.github.io/InterWeb3p/) do projeto.
+[Site do projeto](https://projeto-place-servicos.up.railway.app) do projeto.
+
+## Contas
+Dono: login: dono@gmail.com senha: exemplo123
+
+Funcionario: login: funcionario@gmail.com senha: exemplo123
+
+Cliente: login: cliente@gmail.com senha: exemplo123

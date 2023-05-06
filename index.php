@@ -1,6 +1,7 @@
 <?php 
 session_start();
 
+
 // Conecta ao banco de dados
 //$servidor = "localhost"; // nome do servidor MySQL
 //$usuario_bd = "root"; // nome do usuário do banco de dados
@@ -44,31 +45,26 @@ $consulta = "SELECT id, senha, funcao FROM cadastro WHERE email = '$username'";
 
 // Executa a consulta SQL
 $resultado = $conexao->query($consulta);
-
 // Verifica se a consulta retornou um resultado
 while ($senha_crip = $resultado->fetch_assoc()){
     if (password_verify($password, $senha_crip['senha'])) {
     // Define o nome do usuário na sessão
     $_SESSION["id"] = $senha_crip["id"];
-        $funcao = $senha_crip['funcao'];
+    $_SESSION['funcao'] = $senha_crip['funcao'];
         
-        if($funcao == 'cliente') {
+        if($_SESSION['funcao'] == 'cliente') {
             // Redireciona o usuário para a página protegida
             header("Location: ./pages/home-cliente.php");
         }
 
-        if($funcao == 'funcionario') {
+        if($_SESSION['funcao'] == 'funcionario') {
             // Redireciona o usuário para a página protegida
             header("Location: ./pages/home-funcionario.php");
         }
 
-        if($funcao == 'dono') {
+        if($_SESSION['funcao'] == 'dono') {
             // Redireciona o usuário para a página protegida
             header("Location: ./pages/home-dono.php");
-        }
-
-        else {
-            continue;
         }
 } else {
     // Exibe uma mensagem de erro
@@ -105,8 +101,6 @@ $curl = curl_init();
     $responseArray = json_decode($response,true);
 
     $sucesso = $responseArray['success'] ?? false;
-    
-    echo $sucesso ? 'usuario cadastrado' : 'Recaptha invalido';
     exit;
 
 }

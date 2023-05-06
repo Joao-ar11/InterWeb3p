@@ -1,7 +1,11 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'funcionario') {
+        header('LOCATION: ../index.php');
+    }
     include('../php/conn.php');
 
-    $sql_code = "SELECT id, tipo_servico FROM calculo_orcamento";
+    $sql_code = "SELECT id, tipo_servico FROM orcamento_id";
     $sql_query = $conn->query($sql_code) or die ("Erro ao consultar!");
 ?>
 

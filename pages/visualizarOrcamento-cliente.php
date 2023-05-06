@@ -1,8 +1,11 @@
 <?php
     include('../php/conn.php');
     session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'cliente') {
+        header('LOCATION: ../index.php');
+    }
     $id_cliente = $_SESSION["id"];
-    $orcamentos = $conn->query('SELECT id FROM calculo_orcamento WHERE id_cliente=' . $id_cliente . ';');
+    $orcamentos = $conn->query('SELECT id, validacao FROM orcamento_id WHERE id_cliente=' . $id_cliente . ';');
 ?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
@@ -49,9 +52,19 @@
             $contador = 1;
                 while($orcamento = $orcamentos->fetch_assoc()){
                     echo '<div>
-                        <li>Serviço #000' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '" target="blank"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                        <p class="status01">Em validação</p>
-                    </div>';
+                        <li>Serviço #000' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '" target="blank"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>';
+                    switch ($orcamento['validacao']) {
+                        case 'em validação':
+                            echo '<p class="status02">Em validação</p>';
+                            break;
+                        case 'confirmado':
+                            echo '<p class="status03">Confirmado</p>';
+                            break;
+                        case 'negado':
+                            echo '<p class="status01">Negado</p>';
+                            break;
+                    }
+                    echo '</div>';
                     $contador++;
                 }
             ?>

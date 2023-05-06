@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
+        header('LOCATION: ../index.php');
+    }
     include('../php/conn.php');
     
     //Cadastro Cliente

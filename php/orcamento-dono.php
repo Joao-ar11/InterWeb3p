@@ -1,8 +1,12 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
+        header('LOCATION: ../index.php');
+    }
     include('../php/conn.php');
 
 
-//Informaçoes do Cliente
+//Informacoes do Cliente
 
     $cliente = $_POST["cliente"];
     $setor = $_POST["setor"];
@@ -11,27 +15,29 @@
     $email = $_POST["email"];
     $whatsapp = $_POST["whatsapp"];
 
-//Inserindo dados no Banco
+//Informacoes do Orcamento
+    $id_cliente = 1;
+    $query = 'SELECT id FROM cadastro WHERE email="' . $_POST['email'] . '";';
+    $resultado = $conn->query($query);
+    while ($row = $resultado->fetch_assoc()) {
+        $id_cliente = $row["id"];
+    }
 
-    $id_orcamento = $_POST['orcamento-numero'];
-    $conn->query('INSERT INTO orcamento_id (id) VALUES (' . $id_orcamento . ');');
+    $conn->query('INSERT INTO orcamento_id (tipo_servico, descricao_servico, limitacao_servico, id_cliente, validacao) VALUES ("' . $_POST["tipo-servico"] . '", "' . $_POST["descricao-servico"] . '", "' . $_POST["limitacao-servico"] . '", "' . $id_cliente . '", "em validação");');
+
+    $resultado = $conn->query("SELECT id FROM orcamento_id;");
+    $id_orcamento = $resultado->num_rows;
+
 
     if (isset($cliente) && isset($setor) && isset($endereco) && isset($cidade) && isset($email) && isset($whatsapp)) {
 
-        $insere = "INSERT INTO cliente (id, nome_cliente, setor, endereco, cidade, email, whatsapp) VALUES ('1', '$cliente', '$setor', '$endereco', '$cidade', '$email', '$whatsapp')";
+        $insere = "INSERT INTO cliente (id, nome_cliente, setor, endereco, cidade, email, whatsapp) VALUES ('$id_cliente', '$cliente', '$setor', '$endereco', '$cidade', '$email', '$whatsapp')";
 
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
 
-//Serviço
 
-    $tipo_servico = $_POST["tipo-servico"];
-    $descricao_servico = $_POST["descricao-servico"];
-    $limitacao_servico = $_POST["limitacao-servico"];
-
-//Inserindo dados no Banco
-
-//Itens*
+//Itens
 
     $contador = 1;
     while (isset($_POST["item" . $contador]) && isset($_POST["quant" . $contador]) && isset($_POST["material-servico" . $contador]) && isset($_POST["preco-unitario" . $contador])) {
@@ -70,11 +76,13 @@
     }
 
 //Deslocamento
+
     $distancia = $_POST["distancia"];
     $distancia_valor = str_replace('R$', '', $_POST["distancia-valor"]);
     $valor_total_deslocamento = str_replace('R$', '', $_POST["deslocamento"]);
     
 //Taxas
+
     $seguro_garantia = str_replace('R$', '', $_POST["seguro-garantia"]);
 
     $seguro_civil = str_replace('R$', '', $_POST["seguro-civil"]);
@@ -103,7 +111,9 @@
     mysqli_query($conn, $insere) or die("Não foi possível executar a inserção"); 
 
 }
-//Nome dos Profissionais*
+
+//Nome dos Profissionais
+
     $contador = 1;
     while(isset($_POST['nome-profissional' . $contador]) && isset($_POST['cft-crea' . $contador])) {
         $nome_profissional = $_POST['profissional' . $contador];
@@ -116,7 +126,7 @@
     }
 
 
-//Inserindo dados no Banco
+//Inserindo dados no Banco sobre Deslocamento
 
     if (isset($distancia) && isset($distancia_valor)) {
 
@@ -125,13 +135,13 @@
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
 
-//Observações**
+//Observacoes
 
     $observacao1 = str_replace('R$', '', $_POST["observacao1"]);
     $observacao2 = str_replace('R$', '', $_POST["observacao2"]);
     $observacao3 = str_replace('R$', '', $_POST["observacao3"]);
 
-//inserindo dados no Banco
+//inserindo dados no Banco sobre Observacoes
 
     if (isset($observacao1) && isset($observacao2) && isset($observacao3)) {
 
@@ -146,7 +156,7 @@
     $data_servico = $_POST["data-servico"];
     $horario = $_POST["horario"];
 
-//Inserindo dados no Banco
+//Inserindo dados no Banco sobre Prazos
 
     if (isset($validade_orcamento) && isset($data_servico) && isset($horario)) {
 
@@ -155,18 +165,16 @@
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
     }
 
+//Forma de pagamento
+
+    $insere = 'INSERT INTO forma_pagamento (id_orcamento, e_mail, banco, agencia, conta_corrente, pix) VALUES ('. $id_orcamento . ', "' . $_POST['email-local'] . '", "' . $_POST['banco'] . '", "' . $_POST['agencia'] . '", "' . $_POST['conta-corrente'] . '", "' . $_POST['pix'] . '");';
+    mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
+
     $data = $_POST['data'];
     $valor_total = str_replace('R$', '', $_POST['valor-total']);
     $valor_total_itens = str_replace('R$', '', $_POST['valor-total-itens']);
     $valor_total_MO = str_replace('R$', '', $_POST['mo-total']);
 
-    $id_cliente = 1;
-    $query = 'SELECT id FROM cadastro WHERE email="' . $_POST['email'] . '";';
-    $resultado = $conn->query($query);
-    while ($row = $resultado->fetch_assoc()) {
-        $id_cliente = $row["id"];
-    }
-
-    mysqli_query($conn, "INSERT INTO calculo_orcamento (id, id_cliente, resultado, ddata, valor_total_itens, valor_total_MO, tipo_servico, descricao_servico, limitacao_servico) VALUES ('$id_orcamento', '$id_cliente', '$valor_total', '$data', '$valor_total_itens', '$valor_total_MO', '$tipo_servico', '$descricao_servico', '$limitacao_servico')");
+    mysqli_query($conn, "INSERT INTO calculo_orcamento (id, resultado, ddata, valor_total_itens, valor_total_MO) VALUES ('$id_orcamento', '$valor_total', '$data', '$valor_total_itens', '$valor_total_MO')");
     header('Location: ../pages/preencherOrcamento-dono.php');
 ?>

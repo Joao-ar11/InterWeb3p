@@ -248,11 +248,11 @@ button:nth-child(1):hover {
     transition: 0.4s;
 }
 
-button:nth-child(3) {
+button:nth-child(2) {
     background-color: #46f41b;
 }
 
-button:nth-child(3):hover {
+button:nth-child(2):hover {
     background-color: #6fff4a;
     transform: scale(1.05);
     transition: 0.4s;

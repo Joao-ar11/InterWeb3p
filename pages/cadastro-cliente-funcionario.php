@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'funcionario') {
+        header('LOCATION: ../index.php');
+    }
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-br">
 <head>

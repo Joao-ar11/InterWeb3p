@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'funcionario') {
+        header('LOCATION: ../index.php');
+    }
+    include '../php/conn.php';
+    $orcamentos = $conn->query('SELECT id, validacao FROM orcamento_id ORDER BY id DESC LIMIT 3');
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
 <head> 
@@ -42,18 +50,26 @@
         <h1>Início</h1>
         <h2>SERVIÇOS</h2>
         <ul>
-            <div>
-                <li>Serviço #0001 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status01">Em validação</p>
-            </div>
-            <div>
-                <li>Serviço #0002 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status02">Em execução</p>
-            </div>
-            <div>
-                <li>Serviço #0003 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <p class="status03">Finalizado</p>
-            </div>
+            <?php
+            $contador = 1;
+                while($orcamento = $orcamentos->fetch_assoc()){
+                    echo '<div>
+                        <li>Serviço #' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '" target="blank"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>';
+                    switch ($orcamento['validacao']) {
+                        case 'em validação':
+                            echo '<p class="status02">Em validação</p>';
+                            break;
+                        case 'confirmado':
+                            echo '<p class="status03">Confirmado</p>';
+                            break;
+                        case 'negado':
+                            echo '<p class="status01">Negado</p>';
+                            break;
+                    }
+                    echo '</div>';
+                    $contador++;
+                }
+            ?>
         </ul>
         <div style="display: flex; align-items: center;">
             <button id="more">Ver mais <img id="seta" src="../images/seta-para-baixo.png"></button>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'cliente') {
+        session_abort();
+        header('LOCATION: ../index.php');
+    }
+    include '../php/conn.php';
+    $nome = $conn->query('SELECT nome FROM cadastro WHERE id=' . $_SESSION["id"] . ';')->fetch_assoc()['nome'];
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
 <head> 
@@ -36,7 +45,7 @@
     </header>
 
     <section class="section-home">
-        <h1>Olá, $nomeCliente!</h1>
+        <h1>Olá, <?php echo $nome;?></h1>
         <img src="../images/print-tela-cliente.png" alt="Tela home de cliente" style="width: 600px;">
     </section>
 </body>

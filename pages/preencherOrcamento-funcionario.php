@@ -1,5 +1,9 @@
 <?php 
     include('../php/conn.php');
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'funcionario') {
+        header('LOCATION: ../index.php');
+    }
     if (isset($_POST["taxaAdm"]) && isset($_POST["lucro"]) && isset($_POST["seguro-civil"]) && isset($_POST["imposto"]) && isset($_POST["seguro-garantia"])) {
         $query = 'INSERT INTO tarifa (taxa_administrativa, seguro_respon_civil, seguro_garantia, lucro, imposto) VALUES ("' . $_POST['taxaAdm'] . '", "' . $_POST['seguro-civil'] . '", "' . $_POST['seguro-garantia'] . '", "' . $_POST['lucro'] . '", "' . $_POST['imposto'] . '")';
         $conn->query($query);
@@ -314,30 +318,11 @@
                 <div class="prazos">
                     <h2>Prazos</h2>
                     <label for="validade-orcamento">Quantidade de dias do Prazo de validade do Orçamento:</label>
-                    <input type="text" id="validade-orcamento" name="validade-orcamento">
+                    <input type="date" id="validade-orcamento" name="validade-orcamento">
                     <label for="data-servico">Data do serviço:</label>
-                    <input type="text" id="data-servico" name="data-servico">
+                    <input type="date" id="data-servico" name="data-servico">
                     <label for="horario">Horário:</label>
                     <input type="text" id="horario" name="horario">
-                </div>
-                <div class="cliente">
-                    <h2>Cliente</h2>
-                    <div class="campo">
-                        <label for="nome-cliente">Nome do Cliente:</label>
-                        <input type="text" id="nome-cliente" name="nome-cliente">
-                    </div>
-                    <div class="campo">
-                        <label for="rg-cliente">Nᵒ do RG:</label>
-                        <input type="text" id="rg-cliente" name="rg-cliente">
-                    </div>
-                    <div class="campo">
-                        <label for="autorizacao-cliente">Autorização do cliente:</label>
-                        <input type="text" id="autorizacao-cliente" name="autorizacao-cliente">
-                    </div>
-                    <div class="campo">
-                        <label for="cpf-cliente">Nᵒ do CPF:</label>
-                        <input type="text" id="cpf-cliente" name="cpf-cliente">
-                    </div>
                 </div>
                 <button class="submit" type="button" id="open-modal">Enviar Formulário</button>
 

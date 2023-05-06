@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'cliente') {
+        header('LOCATION: ../index.php');
+    }
+    include '../php/conn.php';
+    $query = 'SELECT id FROM orcamento_id WHERE validacao="em validação" AND id_cliente=' . $_SESSION['id'];
+    $resposta = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-BR">
 <head> 
@@ -39,27 +48,18 @@
         <h1>Início</h1>
         <h2>SERVIÇOS</h2>
         <ul>
-            <div>
-                <li>Serviço #0001 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <div class="botoes">
-                    <button class="btn-confirmar">Confirmar</button>
-                    <button class="btn-negar">Negar</button>
-                </div>
-            </div>
-            <div>
-                <li>Serviço #0002 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <div class="botoes">
-                    <button class="btn-confirmar">Confirmar</button>
-                    <button class="btn-negar">Negar</button>
-                </div>
-            </div>
-            <div>
-                <li>Serviço #0003 <a href="#"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
-                <div class="botoes">
-                    <button class="btn-confirmar">Confirmar</button>
-                    <button class="btn-negar">Negar</button>
-                </div>
-            </div>
+            <?php
+            $contador =  1;
+                while ($orcamento = $resposta->fetch_assoc()){
+                    echo '<div>
+                        <li>Serviço #0001 <a href="./visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>
+                        <div class="botoes">
+                            <a href="../php/validarOrcamento.php?id=' . $orcamento["id"] . '&validacao=confirmado"><button class="btn-confirmar">Confirmar</button></a>
+                            <a href="../php/validarOrcamento.php?id=' . $orcamento["id"] . '&validacao=negado"><button class="btn-negar">Negar</button></a>
+                        </div>
+                    </div>';
+                }
+            ?>
         </ul>
         <div style="display: flex; align-items: center;">
             <button id="more">Ver mais <img id="seta" src="../images/seta-para-baixo.png"></button>

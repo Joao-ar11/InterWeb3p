@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
+        header('LOCATION: ../index.php');
+    }
+?>
 <!DOCTYPE html>
 <html class="home" lang="pt-br">
 <head>
@@ -8,7 +14,7 @@
     <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
     <script src="../javascript/modal.js" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <title>Cadastrar cliente</title>
 </head>
 <body class="home-body">    
@@ -114,7 +120,7 @@
 
            <div class="botoes" > <!-- BOTOES CANCELAR E CONFIRMAR -->
                <button type="reset">Cancelar</button>
-               <div class="g-recaptcha" data-sitekey="6LcnCmclAAAAAIfsoESyWb6brsld_grmS2BavXQ6"></div>
+               
                <button type="button" id="open-modal">Confirmar</button>
                
            </div>
@@ -137,13 +143,6 @@
            </div>
         </form>
     </section>
-    <script type="text/javascript">
-        function valida(){
-            if(grecaptcha.getResponse() ==''){
-                alert('VOCE PRECISA MARCAR A VALIDACAO');
-                return false;
-            }
-        }
-       </script>
+    
 </body>
 </html>

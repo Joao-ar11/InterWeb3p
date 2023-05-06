@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
+        header('LOCATION: ../index.php');
+    }
     include('../php/conn.php');
 
     //Cadastro Funcionario
@@ -6,18 +10,19 @@
     $nome = $_POST["NOME"];
     $email = $_POST["EMAIL"];
     $senha = $_POST["SENHA"];
-    $senhaconfirm = $_POST["SENHACONFIRM"];
+    $senha = password_hash($senha, PASSWORD_DEFAULT);
     $dataa = $_POST["DATANASC"];
     $funcao = 'funcionario';
 
 //Inserindo dados no Banco
 
-    if (isset($nome) && isset($email) && isset($senha) && isset($senhaconfirm) && isset($dataa)) {
+    if (isset($nome) && isset($email) && isset($senha) && isset($dataa)) {
 
-        $insere = "INSERT INTO cadastro_f (nome, email, senha, senha_confirm, dataa, funcao) VALUES ('$nome', '$email', '$senha', '$senhaconfirm', '$dataa', '$funcao')";
+    $insere = "INSERT INTO cadastro (nome, email, senha, dataa, funcao) VALUES ('$nome', '$email', '$senha', '$dataa', '$funcao')";
 
-        mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
-    }
+    mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
+}
+
 
     header('Location: ../pages/cadastro-funcionario-dono.php');
 ?>
