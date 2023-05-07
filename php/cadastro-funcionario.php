@@ -21,6 +21,8 @@
     $insere = "INSERT INTO cadastro (nome, email, senha, dataa, funcao) VALUES ('$nome', '$email', '$senha', '$dataa', '$funcao')";
 
     mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
+
+    $_SESSION['confirmar'] = 'confirmado';
 }
 
 

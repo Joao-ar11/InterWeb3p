@@ -159,8 +159,8 @@
         </form>
     </section>
 
-    <?php
-        if (isset($_POST["confirmar"])) {
+     <?php
+        if (isset($_SESSION["confirmar"]) && $_SESSION['confirmar'] === 'confirmado') {
             echo '
             <!-- Modal Sucesso -->
             <footer>
@@ -170,6 +170,7 @@
                 </div>
                 <button type="button" id="botao-fechar">X</button>
             </footer>';
+            $_SESSION["confirmar"] = '';
         };
     ?>
 </body>

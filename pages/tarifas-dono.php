@@ -7,6 +7,7 @@
     if (isset($_POST["taxaAdm"]) && isset($_POST["lucro"]) && isset($_POST["seguro-civil"]) && isset($_POST["imposto"]) && isset($_POST["seguro-garantia"])) {
         $query = 'INSERT INTO tarifa (taxa_administrativa, seguro_respon_civil, seguro_garantia, lucro, imposto) VALUES ("' . $_POST['taxaAdm'] . '", "' . $_POST['seguro-civil'] . '", "' . $_POST['seguro-garantia'] . '", "' . $_POST['lucro'] . '", "' . $_POST['imposto'] . '")';
         $conn->query($query);
+        $_SESSION['confirmar'] = 'confirmado';
     }
     $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
     $resultado = $conn->query($query);
@@ -173,16 +174,17 @@
     </section>
 
     <?php
-        if (isset($_POST["confirmar"])) {
+        if (isset($_SESSION["confirmar"]) && $_SESSION['confirmar'] === 'confirmado') {
             echo '
             <!-- Modal Sucesso -->
             <footer>
                 <div id="confirmacao">
                     <i class="fa-solid fa-circle-check"></i>
-                    <p>Cliente cadastrado com sucesso!</p>
+                    <p>Tarifas salvas com sucesso!</p>
                 </div>
                 <button type="button" id="botao-fechar">X</button>
             </footer>';
+            $_SESSION['confirmar'] = '';
         };
     ?>
 </body>

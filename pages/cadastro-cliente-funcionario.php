@@ -195,17 +195,18 @@
         }
     </script>
 
-    <?php
-        if (isset($_POST["confirmar"])) {
+     <?php
+        if (isset($_SESSION["confirmar"]) && $_SESSION['confirmar'] === 'confirmado') {
             echo '
             <!-- Modal Sucesso -->
             <footer>
                 <div id="confirmacao">
                     <i class="fa-solid fa-circle-check"></i>
-                    <p>Funcionário cadastrado com sucesso!</p>
+                    <p>Cliente cadastrado com sucesso!</p>
                 </div>
                 <button type="button" id="botao-fechar">X</button>
             </footer>';
+            $_SESSION["confirmar"] = '';
         };
     ?>
 </body>
