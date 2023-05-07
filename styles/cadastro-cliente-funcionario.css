@@ -94,6 +94,24 @@ input {
     align-items: center;
 }
 
+.opcoes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opcoes button {
+    margin-bottom: 7px;
+    cursor: pointer;
+    height: 2rem;
+    width: 70px;
+    background-color: #D02828;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
 .tabs-home .user .user-image {
     width: 45px;
     height: 45px;
@@ -226,7 +244,7 @@ input[type="number"]::-webkit-inner-spin-button {
     justify-content: space-between;
 }
 
-button {
+section button {
     font-weight: bold;
     border: none;
     border-radius: 25px;
@@ -236,11 +254,11 @@ button {
     font-size: 1em;
 }
 
-button:nth-child(1) {
+section button:nth-child(1) {
     background-color: rgb(243, 39, 39);
 }
 
-button:nth-child(1):hover {
+section button:nth-child(1):hover {
     background-color: rgba(255, 0, 0, 0.765);
     transform: scale(1.05);
     transition: 0.4s;

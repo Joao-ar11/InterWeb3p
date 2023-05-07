@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista orçamento</title>
+    <title>Lista Orçamento</title>
     <script src="https://kit.fontawesome.com/3bc1a873c3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../styles/lista-orcamento-funcionario.css">
     <style>
@@ -101,16 +101,18 @@
             </a>
         </ul>
 
-        <div class="user">
-            <div class="user-image">
-                
+        <div class="opcoes">
+            <div class="user">
+                <div class="user-image">
+                </div>
+                <p>Usuário: Cliente</p>
             </div>
-            <p>Usuário: Funcionário</p>
+            <a href="../php/logout.php"><button>Logout</button></a>
         </div>
     </header>
 
     <section class="section-home">
-        <h1 id="titulo">Lista de orçamentos</h1>
+        <h1 id="titulo">Lista de Orçamentos</h1>
 
         <h1>
         <?php 

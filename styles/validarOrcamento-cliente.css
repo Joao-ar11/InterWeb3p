@@ -1,18 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
 
-.botoes {
+.lista {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
 }
 
-.botoes button{ 
-    margin-bottom: 30px;
-    margin-right: 30px;
+.linha-servico {
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.botoes button[class="btn-confirmar"]{ 
-    margin-left: 30px;
+.botoes {
+    margin-bottom: 15px;
+    width: 360px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
 }
 
 .btn-confirmar{
@@ -38,15 +51,8 @@
     height: 30px;
     cursor: pointer;
     border: none;
-
 }
 /* SIDE BAR */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
 
 input {
     outline: none;
@@ -118,7 +124,25 @@ input {
     margin-left: 5px;
 }
 
-.tabs-home .user {
+.opcoes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opcoes button{
+    margin-bottom: 7px;
+    cursor: pointer;
+    height: 2rem;
+    width: 70px;
+    background-color: #D02828;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.tabs-home .user{
     margin: 0 0 10px 5px;
     display: flex;
     justify-content: center;
@@ -162,7 +186,7 @@ input {
     margin-top: 4em;
 }
 
-.section-home li{
+.section-home .servico{
     list-style-type: none;
     font-size: 1.4em;
     padding-left: 16px;
@@ -191,7 +215,7 @@ input {
     margin-bottom: 30px;
 }
 
-.section-home li img{
+.section-home .servico img{
     margin-left: 15px;
     height: 100%;
     background-color: #ADE2FF;

@@ -37,10 +37,13 @@
             </a>
         </ul>
 
-        <div class="user">
-            <div class="user-image">
+        <div class="opcoes">
+            <div class="user">
+                <div class="user-image">
+                </div>
+                <p>Usuário: Cliente</p>
             </div>
-            <p>Usuário: Cliente</p>
+            <a href="../php/logout.php"><button>Logout</button></a>
         </div>
     </header>
 

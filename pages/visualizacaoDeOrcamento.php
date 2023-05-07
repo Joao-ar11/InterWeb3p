@@ -199,38 +199,38 @@
             <h2>Taxas</h2>
             <div class="linha-taxa">
                 <p class="input taxa-mo"><b>Mão de obra</b></p>
-                <p class="input"> <?php echo $valor_total_MO;?> </p>
+                <p class="input"> R$<?php echo $valor_total_MO;?> </p>
             
             </div>
             <div class="linha-taxa">
                 <p class="input taxa-deslocamento"><b>Deslocamento</b></p>
-                <p class="input"> <?php echo $valor_total_deslocamento;?> </p>             
+                <p class="input"> R$<?php echo $valor_total_deslocamento;?> </p>             
             </div>
             <div class="linha-taxa">
                 <p class="input"><b>Seguro Garantia</b></p>
                 <p class="input"><?php echo $seguro_garantia_taxa;?></p>
-                <p class="input"><?php echo $seguro_garantia;?></p>
+                <p class="input">R$<?php echo $seguro_garantia;?></p>
                 
             </div>
             <div class="linha-taxa">
                 <p class="input"><b>Seguro Respon. Civil</b></p>
                 <p class="input"> <?php echo $seguro_respon_civil;?> </p>
-                <p class="input"> <?php echo $seguro_civil;?></p>
+                <p class="input"> R$<?php echo $seguro_civil;?></p>
             </div>
             <div class="linha-taxa">
                 <p class="input"><b>TX ADMINISTRATIVA</b></p>
                 <p class="input"> <?php echo $taxa_administrativa;?> </p>
-                <p class="input"> <?php echo $admin_valor;?></p>
+                <p class="input"> R$<?php echo $admin_valor;?></p>
             </div>
             <div class="linha-taxa">
                 <p class="input"><b>LUCRO</b></p>
                 <p class="input"><?php echo $lucro;?></p>
-                <p class="input"><?php echo $lucro_valor?> </p>
+                <p class="input">R$<?php echo $lucro_valor?> </p>
             </div>
             <div class="linha-taxa">
-                <p class="input"><b>IMPOSTOS</b></p>
-                <p class="input"><?php echo $imposto;?></p>
-                <p class="input"><?php echo $impostos_valor?></p>
+                <p class="input imposto"><b>IMPOSTOS</b></p>
+                <p class="input imposto"><?php echo $imposto;?></p>
+                <p class="input imposto">R$<?php echo $impostos_valor?></p>
             </div>
             <div class="linha-taxa">
                 <p class="input desconto"><b>DESCONTO à vista(%)</b></p>

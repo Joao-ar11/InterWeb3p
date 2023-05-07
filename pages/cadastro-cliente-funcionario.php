@@ -34,15 +34,18 @@
                 <li><i class="fa-solid fa-file-signature"></i> Preencher Orçamento</li>
             </a>
             <a href="lista-orcamento-funcionario.php">
-                <li><i class="fas fa-list"></i> Lista de orçamentos</li>
+                <li><i class="fas fa-list"></i> Lista de Orçamentos</li>
             </a>
         </ul>
         
 
-        <div class="user">
-            <div class="user-image">
+        <div class="opcoes">
+            <div class="user">
+                <div class="user-image">
+                </div>
+                <p>Usuário: Cliente</p>
             </div>
-            <p>Usuário: Funcionário</p>
+            <a href="../php/logout.php"><button>Logout</button></a>
         </div>
 
     </header>
