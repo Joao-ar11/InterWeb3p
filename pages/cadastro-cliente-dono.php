@@ -112,7 +112,7 @@
     <section class="section-home" > <!-- CONTEUDO PRINCIPAL -->
         <h1>Cadastrar Cliente</h1>
         
-        <form action="../php/cadastro-cliente-dono.php" method="post" onsubmit="return valida()" id="formulario"> <!-- INPUTS - FORMULÁRIO -->
+        <form action="../php//cadastro-cliente-dono.php" method="post" onsubmit="return valida()" id="formulario"> <!-- INPUTS - FORMULÁRIO -->
 
             <div class="input-grande" >
                <label for="NOME">Nome da empresa</label>
@@ -189,7 +189,7 @@
                <div class="modal-body">
                    <h2 class="texto">Você deseja confirmar o cadastro do cliente?</h2>
                    <div class="alinhando-buttons">
-                       <button class="confirmar-modal" type="submit">Confirmar</button>
+                       <button class="confirmar-modal" type="submit" style="background-color: rgb(0, 197, 0);">Confirmar</button>
                        <button type="button" class="fechar-modal" >Negar</button>
                    </div>
                </div>
