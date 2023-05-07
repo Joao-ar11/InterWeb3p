@@ -1,14 +1,5 @@
 <?php 
     session_start();
-    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
-        header('LOCATION: ../index.php');
-    }
-    include('../php/conn.php');
-    if (isset($_POST["taxaAdm"]) && isset($_POST["lucro"]) && isset($_POST["seguro-civil"]) && isset($_POST["imposto"]) && isset($_POST["seguro-garantia"])) {
-        $query = 'INSERT INTO tarifa (taxa_administrativa, seguro_respon_civil, seguro_garantia, lucro, imposto) VALUES ("' . $_POST['taxaAdm'] . '", "' . $_POST['seguro-civil'] . '", "' . $_POST['seguro-garantia'] . '", "' . $_POST['lucro'] . '", "' . $_POST['imposto'] . '")';
-        $conn->query($query);
-        $_SESSION['confirmar'] = 'confirmado';
-    }
     $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
     $resultado = $conn->query($query);
     $taxa_adm = '0%';
@@ -126,7 +117,7 @@
 
     <section class="section-home">
         <h1>Tarifas</h1>
-        <form action="#" method="post" id="formulario">
+        <form action="../php/tarifas.php" method="post" id="formulario">
             <div class="grid-input">
                 <div class="campo">
                     <label for="taxataxaAdm">Taxa Adminstrativa:</label>
