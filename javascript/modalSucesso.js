@@ -29,5 +29,4 @@ formulario.addEventListener('submit', event =>{
     }, 3000)
 
     formulario.submit()
-    formulario.reset()
 })
