@@ -58,13 +58,16 @@
                         <li><i class="fa-solid fa-file-signature"></i> Preencher Orçamento</li>
                     </a>
                     <a href="lista-orcamento-funcionario.php">
-                        <li><i class="fas fa-list"></i> Lista de orçamentos</li>
+                        <li><i class="fas fa-list"></i> Lista de Orçamentos</li>
                     </a>
                 </ul>
-                <div class="user">
-                    <div class="user-image">
+                <div class="opcoes">
+                    <div class="user">
+                        <div class="user-image">
+                        </div>
+                        <p>Usuário: Cliente</p>
                     </div>
-                    <p>Usuário: Funcionário</p>
+                    <a href="../php/logout.php"><button>Logout</button></a>
                 </div>
             </div>
         </header>
@@ -224,7 +227,7 @@
                         <p id="taxa-lucro"><?php echo $lucro?></p>
                         <input type="text" id="lucro-valor" class="taxa" name="lucro-valor" value="R$0.00" readonly>
                     </div>
-                    <div class="linha-taxa">
+                    <div class="linha-taxa impostos">
                         <p>Impostos</p>
                         <p id="taxa-impostos"><?php echo $imposto?></p>
                         <input type="text" id="impostos-valor" class="taxa" name="impostos-valor" value="R$0.00" readonly>
@@ -232,7 +235,7 @@
                     <div class="linha-taxa desconto">
                         <p>Desconto</p>
                         <input type="text" id="taxa-desconto" name="taxa-desconto">
-                        <input type="text" id="desconto-valor" name="desconto-valor" value="- R0.00"readonly>
+                        <input type="text" id="desconto-valor" name="desconto-valor" value="- R$0.00"readonly>
                     </div>
                 </div>
                 <div class="profissionais">

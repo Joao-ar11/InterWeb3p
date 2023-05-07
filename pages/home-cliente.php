@@ -30,17 +30,20 @@
                 <li><i class="fas fa-home"></i> Home</li>
             </a>
             <a href="visualizarOrcamento-cliente.php">
-                <li><i class="fa-solid fa-file-contract"></i> Visualizar orçamento</li>
+                <li><i class="fa-solid fa-file-contract"></i> Visualizar Orçamento</li>
             </a>
             <a href="validarOrcamento-cliente.php">
-                <li><i class="fa-solid fa-circle-check"></i> Validar orçamento</li>
+                <li><i class="fa-solid fa-circle-check"></i> Validar Orçamento</li>
             </a>
         </ul>
 
-        <div class="user">
-            <div class="user-image">
+        <div class="opcoes">
+            <div class="user">
+                <div class="user-image">
+                </div>
+                <p>Usuário: Cliente</p>
             </div>
-            <p>Usuário: Cliente</p>
+            <a href="../php/logout.php"><button>Logout</button></a>
         </div>
     </header>
 

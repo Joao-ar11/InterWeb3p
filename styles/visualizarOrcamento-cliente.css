@@ -82,6 +82,24 @@ input {
     margin-left: 5px;
 }
 
+.opcoes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opcoes button {
+    margin-bottom: 7px;
+    cursor: pointer;
+    height: 2rem;
+    width: 70px;
+    background-color: #D02828;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
 .tabs-home .user {
     margin: 0 0 10px 5px;
     display: flex;

@@ -150,6 +150,24 @@ form {
     align-items: center;
 }
 
+.opcoes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opcoes button {
+    margin-bottom: 7px;
+    cursor: pointer;
+    height: 2rem;
+    width: 70px;
+    background-color: #D02828;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
 .tabs-home .user .user-image {
     width: 45px;
     height: 45px;
@@ -158,7 +176,7 @@ form {
     background-color: #fff;
 }
 
-.tabs-home .user p {
+.tabs-home .user p{
     margin-left: 1em;
     margin-right: 1em;
     font-weight: bold;

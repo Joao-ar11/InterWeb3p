@@ -83,27 +83,29 @@
                     <li><i class="fas fa-home"></i> Home</li>
                 </a>
                 <a href="cadastro-funcionario-dono.php">
-                    <li><i class="fas fa-user-plus"></i> Cadastrar funcionário</li>
+                    <li><i class="fas fa-user-plus"></i> Cadastrar Funcionário</li>
                 </a>
                 <a href="cadastro-cliente-dono.php">
-                    <li><i class="fas fa-user-plus"></i></i> Cadastrar cliente</li>
+                    <li><i class="fas fa-user-plus"></i></i> Cadastrar Cliente</li>
                 </a>
                 <a href="tarifas-dono.php">
                     <li><i class="fas fa-file-invoice"></i> Tarifas</li>
                 </a>
                 <a href="preencherOrcamento-dono.php">
-                    <li><i class="fas fa-list-alt"></i> Preencher orçamento</li>
+                    <li><i class="fas fa-list-alt"></i> Preencher Orçamento</li>
                 </a>
                 <div class="atual"></div>
                 <a href="lista-orcamento-dono.php">
-                    <li><i class="fas fa-check-circle"></i> Lista de orçamentos</li>
+                    <li><i class="fas fa-check-circle"></i> Lista de Orçamentos</li>
                 </a>
             </ul>
-            <div class="user">
-                <div class="user-image">
-            
+            <div class="opcoes">
+                <div class="user">
+                    <div class="user-image">
+                    </div>
+                    <p>Usuário: Cliente</p>
                 </div>
-                <p>Usuário: Dono</p>
+                <a href="../php/logout.php"><button>Logout</button></a>
             </div>
     </header>
 
