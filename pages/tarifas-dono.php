@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    include '../php/conn.php';
     $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
     $resultado = $conn->query($query);
     $taxa_adm = '0%';
