@@ -112,7 +112,7 @@
     <section class="section-home" > <!-- CONTEUDO PRINCIPAL -->
         <h1>Cadastrar Cliente</h1>
         
-        <form action="../php//cadastro-cliente-dono.php" method="post" onsubmit="return valida()" id="formulario"> <!-- INPUTS - FORMULÁRIO -->
+        <form action="../php/cadastro-cliente-dono.php" method="post" onsubmit="return valida()" id="formulario"> <!-- INPUTS - FORMULÁRIO -->
 
             <div class="input-grande" >
                <label for="NOME">Nome da empresa</label>

@@ -109,6 +109,7 @@ input {
     font-weight: bold;
     border: none;
     border-radius: 10px;
+    background-color: #D02828;
 }
 
 .tabs-home .user .user-image {
