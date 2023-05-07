@@ -9,5 +9,5 @@
         $conn->query($query);
         $_SESSION['confirmar'] = 'confirmado';
     }
-    header('LOCATION: ../pages/tarifas.php');
+    header('LOCATION: ../pages/tarifas-dono.php');
 ?>
