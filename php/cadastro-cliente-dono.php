@@ -24,7 +24,7 @@
 
     if (isset($nome) && isset($cnpj) && isset($contato) && isset($endereco) && isset($email) && isset($bairro) && isset($n_endereco) && isset($complemento) && isset($senha) && isset($funcao))  {
 
-        $insere = "INSERT INTO cadastro (contato, nome, cnpj, email, senha, n_endereco, bairro, complemento, funcao) VALUES ('$contato','$nome','$cnpj','$email','$senha_crip','$n_endereco','$bairro','$complemento','$funcao')";
+        $insere = "INSERT INTO cadastro (contato, nome, cnpj, email, senha, n_endereco, endereco, bairro, complemento, funcao) VALUES ('$contato','$nome','$cnpj','$email','$senha_crip','$n_endereco', '$endereco', '$bairro','$complemento','$funcao')";
         mysqli_query($conn, $insere) or die("Não foi possível executar a inserção");
         $_SESSION['confirmar'] = 'confirmado';
     }
