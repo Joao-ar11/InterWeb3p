@@ -28,5 +28,7 @@ formulario.addEventListener('submit', event =>{
         botaoModalSucessoFechar.style.display = "none"
     }, 3000)
 
-    formulario.submit()
+    setTimeout(function() {
+        formulario.submit()
+    }, 3000)
 })
