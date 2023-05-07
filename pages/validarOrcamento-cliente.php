@@ -55,12 +55,13 @@
                 $contador =  1;
                     while ($orcamento = $resposta->fetch_assoc()){
                         echo '<div class="linha-servico">
-                            <div class="servico">Serviço #0001 <a href="./visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></div>
+                            <div class="servico">Serviço #' . $contador . ' <a href="./visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></div>
                             <div class="botoes">
                                 <a href="../php/validarOrcamento.php?id=' . $orcamento["id"] . '&validacao=confirmado"><button class="btn-confirmar">Confirmar</button></a>
                                 <a href="../php/validarOrcamento.php?id=' . $orcamento["id"] . '&validacao=negado"><button class="btn-negar">Negar</button></a>
                             </div>
                         </div>';
+                        $contador++;
                     }
                 ?>
             </div>

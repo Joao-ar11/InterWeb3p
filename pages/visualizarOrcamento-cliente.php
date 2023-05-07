@@ -55,7 +55,7 @@
             $contador = 1;
                 while($orcamento = $orcamentos->fetch_assoc()){
                     echo '<div>
-                        <li>Serviço #000' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '" target="blank"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>';
+                        <li>Serviço #' . $contador . ' <a href="../pages/visualizacaoDeOrcamento.php?id=' . $orcamento["id"] . '" target="blank"><img src="../images/expandir.png"  width="30" height="30" alt=""></a></li>';
                     switch ($orcamento['validacao']) {
                         case 'em validação':
                             echo '<p class="status02">Em validação</p>';

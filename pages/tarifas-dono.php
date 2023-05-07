@@ -1,5 +1,8 @@
 <?php 
     session_start();
+    if (!isset($_SESSION['funcao']) || $_SESSION['funcao'] !== 'dono') {
+        header('LOCATION: ../index.php');
+    }
     include '../php/conn.php';
     $query = 'SELECT * FROM tarifa WHERE (SELECT MAX(id_tarifa) FROM tarifa);';
     $resultado = $conn->query($query);
@@ -64,6 +67,7 @@
             position: absolute;
             right: -10px;
             bottom: 35px;
+            border-radius: 50%;
             background-color: #D9D9D9;
             border: none; /* adicionado */
             cursor: pointer; /* adicionado */
