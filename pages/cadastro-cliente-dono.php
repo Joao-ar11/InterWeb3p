@@ -12,10 +12,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/cadastro-cliente-dono.css">
     <link rel="stylesheet" href="../styles/modal.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/3bc1a873c3.js" crossorigin="anonymous"></script>
     <script src="../javascript/modal.js" defer></script>
-    
+    <script src="../javascript/modalSucesso.js" defer></script>
     <title>Cadastrar cliente</title>
+    <style>
+        footer {
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+            margin-right: 3em;
+        }
+        div#confirmacao {
+            display: flex;
+            align-items: center;
+            background-color: #00FF7F;
+            width: 330px;
+            height: 50px;
+            border-radius: 5px;
+            justify-content: center;
+            display: none;
+            z-index: 10000;
+            padding: 10px; /* adicionado */
+
+        }
+
+        div#confirmacao i {
+            margin-right: 10px;
+        }
+
+        div#confirmacao p {
+            padding-bottom: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+
+        button#botao-fechar {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: -10px;
+            bottom: 35px;
+            background-color: #D9D9D9;
+            border-radius: 50%;
+            border: none; /* adicionado */
+            cursor: pointer; /* adicionado */
+            display: none;
+        }
+
+        button#botao-fechar:hover {
+            transform: scale(1.08);
+            transition: .2s;
+            background-color: #A9A9A9;
+        }
+    </style>
 </head>
 <body class="home-body">    
     <header class="tabs-home"> <!-- BARRA LATERAL -->
@@ -59,7 +109,7 @@
     <section class="section-home" > <!-- CONTEUDO PRINCIPAL -->
         <h1>Cadastrar Cliente</h1>
         
-        <form action="../php/cadastro-cliente-dono.php" method="post" onsubmit="return valida()"> <!-- INPUTS - FORMULÁRIO -->
+        <form action="../php/cadastro-cliente-dono.php" method="post" onsubmit="return valida()" id="formulario"> <!-- INPUTS - FORMULÁRIO -->
 
             <div class="input-grande" >
                <label for="NOME">Nome da empresa</label>
@@ -119,7 +169,7 @@
             </div>
 
            <div class="botoes" > <!-- BOTOES CANCELAR E CONFIRMAR -->
-               <button type="reset">Cancelar</button>
+               <button type="reset">Limpar</button>
                
                <button type="button" id="open-modal">Confirmar</button>
                
@@ -144,5 +194,14 @@
         </form>
     </section>
     
+    <!-- Modal Sucesso -->
+    <footer>
+        <div id="confirmacao">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Cliente cadastrado com sucesso!</p>
+        </div>
+        <button type="button" id="botao-fechar">X</button>
+    </footer>
+
 </body>
 </html>

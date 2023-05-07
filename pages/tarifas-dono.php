@@ -32,8 +32,57 @@
     <title>Tarifas</title>
     <link rel="stylesheet" href="../styles/tarifas-dono.css">
     <link rel="stylesheet" href="../styles/modal.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/3bc1a873c3.js" crossorigin="anonymous"></script>
     <script src="../javascript/modal.js" defer></script>
+    <script src="../javascript/modalSucesso.js" defer></script>
+    <style>
+        footer {
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+            margin-right: 3em;
+        }
+        div#confirmacao {
+            display: flex;
+            align-items: center;
+            background-color: #00FF7F;
+            width: 300px;
+            height: 50px;
+            border-radius: 5px;
+            justify-content: center;
+            display: none;
+            z-index: 10000;
+            padding: 10px; /* adicionado */
+        }
+
+        div#confirmacao i {
+            margin-right: 10px;
+        }
+
+        div#confirmacao p {
+            padding-bottom: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+
+        button#botao-fechar {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: -10px;
+            bottom: 35px;
+            background-color: #D9D9D9;
+            border: none; /* adicionado */
+            cursor: pointer; /* adicionado */
+            display: none;
+        }
+
+        button#botao-fechar:hover {
+            transform: scale(1.08);
+            transition: .2s;
+            background-color: #A9A9A9;
+        }
+    </style>
 </head>
 <body class="tarifas-body">
     <header class="tabs-home">
@@ -74,7 +123,7 @@
 
     <section class="section-home">
         <h1>Tarifas</h1>
-        <form action="#" method="post">
+        <form action="#" method="post" id="formulario">
             <div class="grid-input">
                 <div class="campo">
                     <label for="taxataxaAdm">Taxa Adminstrativa:</label>
@@ -120,5 +169,14 @@
            </div>
         </form>
     </section>
+
+    <!-- Modal Sucesso -->
+    <footer>
+        <div id="confirmacao">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Tarifas atualizadas com sucesso!</p>
+        </div>
+        <button type="button" id="botao-fechar">X</button>
+    </footer>
 </body>
 </html>
