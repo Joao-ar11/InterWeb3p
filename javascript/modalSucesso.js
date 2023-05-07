@@ -1,34 +1,56 @@
-var formulario = document.getElementById('formulario')
-var botaoModalSucessoFechar = document.getElementById('botao-fechar')
+// var formulario = document.getElementById('formulario')
+// var botaoModalSucessoFechar = document.getElementById('botao-fechar')
 
-formulario.addEventListener('submit', event =>{
-    event.preventDefault()
+// formulario.addEventListener('submit', event =>{
+//     event.preventDefault()
 
-    var elementoFade = document.getElementById('fade')
-    elementoFade.classList.toggle("hide")
+//     var elementoFade = document.getElementById('fade')
+//     elementoFade.classList.toggle("hide")
 
-    var elementoModal = document.getElementById('modal')
-    elementoModal.classList.toggle("hide")
+//     var elementoModal = document.getElementById('modal')
+//     elementoModal.classList.toggle("hide")
 
-    var divSucesso = document.getElementById('confirmacao')
-    divSucesso.style.display = "flex"
-    botaoModalSucessoFechar.style.display = "inline-block"
+//     var divSucesso = document.getElementById('confirmacao')
+//     divSucesso.style.display = "flex"
+//     botaoModalSucessoFechar.style.display = "inline-block"
 
     
-    botaoModalSucessoFechar.addEventListener('click', ()=> {
-        divSucesso.style.display = "none"
-        botaoModalSucessoFechar.style.display = "none"
-    })
+//     botaoModalSucessoFechar.addEventListener('click', ()=> {
+//         divSucesso.style.display = "none"
+//         botaoModalSucessoFechar.style.display = "none"
+//     })
 
-    setTimeout(function() {
-        divSucesso.style.display = "none"
-    }, 3000)
+//     setTimeout(function() {
+//         divSucesso.style.display = "none"
+//     }, 800)
 
-    setTimeout(function() {
-        botaoModalSucessoFechar.style.display = "none"
-    }, 3000)
+//     setTimeout(function() {
+//         botaoModalSucessoFechar.style.display = "none"
+//     }, 800)
 
-    setTimeout(function() {
-        formulario.submit()
-    }, 3000)
+//     function enviarFormulario() {
+//         formulario.submit()
+//     }
+
+//     setTimeout(enviarFormulario, 800)
+// })
+
+var botaoModalSucessoFechar = document.getElementById('botao-fechar')
+
+var divSucesso = document.getElementById('confirmacao')
+divSucesso.style.display = "flex"
+botaoModalSucessoFechar.style.display = "inline-block"
+
+
+botaoModalSucessoFechar.addEventListener('click', ()=> {
+    divSucesso.style.display = "none"
+    botaoModalSucessoFechar.style.display = "none"
 })
+
+setTimeout(function() {
+    divSucesso.style.display = "none"
+}, 3000)
+
+setTimeout(function() {
+    botaoModalSucessoFechar.style.display = "none"
+}, 3000)

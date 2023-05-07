@@ -151,7 +151,7 @@
                 <div class="modal-body">
                     <h2 class="texto">Você deseja confirmar o cadastro do funcionário?</h2>
                     <div class="alinhando-buttons">
-                        <button class="confirmar-modal" type="submit">Confirmar</button>
+                        <button class="confirmar-modal" type="submit" name="confirmar">Confirmar</button>
                         <button type="button" class="fechar-modal">Negar</button>
                     </div>
                 </div>
@@ -159,14 +159,18 @@
         </form>
     </section>
 
-    <!-- Modal Sucesso -->
-    <footer>
-        <div id="confirmacao">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Funcionário cadastrado com sucesso!</p>
-        </div>
-        <button type="button" id="botao-fechar">X</button>
-    </footer>
-    
+    <?php
+        if (isset($_POST["confirmar"])) {
+            echo '
+            <!-- Modal Sucesso -->
+            <footer>
+                <div id="confirmacao">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p>Funcionário cadastrado com sucesso!</p>
+                </div>
+                <button type="button" id="botao-fechar">X</button>
+            </footer>';
+        };
+    ?>
 </body>
 </html>

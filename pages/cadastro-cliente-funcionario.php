@@ -15,6 +15,57 @@
     <script src="https://kit.fontawesome.com/3bc1a873c3.js" crossorigin="anonymous"></script>
     <title>Cadastrar cliente</title>
     <script src="../javascript/modal.js" defer></script>
+    <script src="../javascript/modalSucesso.js" defer></script>
+    <style>
+        footer {
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+            margin-right: 3em;
+        }
+        div#confirmacao {
+            display: flex;
+            align-items: center;
+            background-color: #00FF7F;
+            width: 330px;
+            height: 50px;
+            border-radius: 5px;
+            justify-content: center;
+            display: none;
+            z-index: 10000;
+            padding: 10px; /* adicionado */
+
+        }
+
+        div#confirmacao i {
+            margin-right: 10px;
+        }
+
+        div#confirmacao p {
+            padding-bottom: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+
+        button#botao-fechar {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: -10px;
+            bottom: 35px;
+            background-color: #D9D9D9;
+            border-radius: 50%;
+            border: none; /* adicionado */
+            cursor: pointer; /* adicionado */
+            display: none;
+        }
+
+        button#botao-fechar:hover {
+            transform: scale(1.08);
+            transition: .2s;
+            background-color: #A9A9A9;
+        }
+    </style>
 <body class="home-body">    
     <header class="tabs-home"> <!-- BARRA LATERAL -->
         <div class="box-imagem">
@@ -127,7 +178,7 @@
                <div class="modal-body">
                    <h2 class="texto">Você deseja confirmar o cadastro do cliente?</h2>
                    <div class="alinhando-buttons">
-                       <button class="confirmar-modal" type="submit">Confirmar</button>
+                       <button class="confirmar-modal" type="submit" name="confirmar">Confirmar</button>
                        <button type="button" class="fechar-modal">Negar</button>
                    </div>
                </div>
@@ -142,7 +193,20 @@
                 return false;
             }
         }
-       </script>
+    </script>
 
+    <?php
+        if (isset($_POST["confirmar"])) {
+            echo '
+            <!-- Modal Sucesso -->
+            <footer>
+                <div id="confirmacao">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p>Funcionário cadastrado com sucesso!</p>
+                </div>
+                <button type="button" id="botao-fechar">X</button>
+            </footer>';
+        };
+    ?>
 </body>
 </html>
