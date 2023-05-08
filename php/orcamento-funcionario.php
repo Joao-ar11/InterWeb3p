@@ -176,5 +176,6 @@
     $valor_total_MO = str_replace('R$', '', $_POST['mo-total']);
 
     mysqli_query($conn, "INSERT INTO calculo_orcamento (id, resultado, ddata, valor_total_itens, valor_total_MO) VALUES ('$id_orcamento', '$valor_total', '$data', '$valor_total_itens', '$valor_total_MO')");
-    header('Location: ../pages/preencherOrcamento-dono.php');
+    $_SESSION['confirmar'] = 'confirmado';
+    header('Location: ../pages/preencherOrcamento-funcionario.php');
 ?>

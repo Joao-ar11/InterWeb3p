@@ -32,7 +32,59 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
     <script src="../javascript/preencherOrcamento.js" defer></script>
     <script src="../javascript/modal.js" defer></script>
+    <script src="../javascript/modalSucesso.js" defer></script>
     <title>Preencher Orçamento</title>
+    <style>
+        footer {
+            position: fixed;
+            z-index: 1;
+            right: 0px;
+            bottom: 20px;
+            will-change: transform;
+            margin-right: 3em;
+        }
+        div#confirmacao {
+            display: flex;
+            align-items: center;
+            background-color: #00FF7F;
+            width: 300px;
+            height: 50px;
+            border-radius: 5px;
+            justify-content: center;
+            display: none;
+            z-index: 10000;
+            padding: 10px; /* adicionado */
+        }
+
+        div#confirmacao i {
+            margin-right: 10px;
+        }
+
+        div#confirmacao p {
+            padding-bottom: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+
+        button#botao-fechar {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            right: -10px;
+            bottom: 35px;
+            border-radius: 50%;
+            background-color: #D9D9D9;
+            border: none; /* adicionado */
+            cursor: pointer; /* adicionado */
+            display: none;
+        }
+
+        button#botao-fechar:hover {
+            transform: scale(1.08);
+            transition: .2s;
+            background-color: #A9A9A9;
+        }
+    </style>
 </head>
 <body>
     <div class="pagina">
@@ -347,6 +399,20 @@
                 </div>
             </form>
         </section>
+        <?php
+            if (isset($_SESSION["confirmar"]) && $_SESSION['confirmar'] === 'confirmado') {
+                echo '
+                <!-- Modal Sucesso -->
+                <footer>
+                    <div id="confirmacao">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>Orçamento salvo com sucesso!</p>
+                    </div>
+                    <button type="button" id="botao-fechar">X</button>
+                </footer>';
+                $_SESSION['confirmar'] = '';
+            };
+        ?>
     </div>
 </body>
 </html>
