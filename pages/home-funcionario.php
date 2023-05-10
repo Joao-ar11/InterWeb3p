@@ -43,7 +43,7 @@
             <div class="user">
                 <div class="user-image">
                 </div>
-                <p>Usuário: funcionário</p>
+                <p>Usuário: Funcionário</p>
             </div>
             <a href="../php/logout.php"><button>Logout</button></a>
         </div>

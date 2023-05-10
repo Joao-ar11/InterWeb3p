@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/preencherOrcamento-dono.css">
     <link rel="stylesheet" href="../styles/modal.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sua-integridade-aqui" crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/3bc1a873c3.js" crossorigin="anonymous"></script>
     <script src="../javascript/preencherOrcamento.js" defer></script>
     <script src="../javascript/modal.js" defer></script>
     <script src="../javascript/modalSucesso.js" defer></script>
